@@ -58,6 +58,15 @@ void delay(unsigned int ms){
         for(j = 0; j < 1000; j++);
     }
 }
+//3x4 keypad mapping table
+
+char keypad[4][4] = {
+    {'1', '2', '3', ' '},
+    {'4', '5', '6', ' '},
+    {'7', '8', '9', ' '},
+    {'*', '0', '#', ' '}
+};
+
 
 int main(void){
 
@@ -67,10 +76,19 @@ int main(void){
 	TRISC = 0x00; // set PORTC as output for LCD control signals
     TRISD = 0xFF; // set PORTD bits 0-7 as input (for keypad)
 
-    initLCD();
+    initLCD(); 
 
-    instCtrl(0x80) ; // Set cursor to the beginning of the first line
-    dataCtrl(0x41); // Display 'A' on the first line
-    
+    //MM74C922 and 3x4 keypad connections
+    // Connect MM74C922 outputs to PORTD (RD0-RD7)
+    // Connect MM74C922 strobe to RD4 (not used in this code)
+
+    while(1){
+        if(RD4){ // Check if a key is pressed (strobe signal)
+            unsigned char key = PORTD & 0x0F; // Read lower 4 bits for key value
+            while(RD4); // Wait until key is released (strobe goes low)
+            dataCtrl(keypad[key/4][key%4]); // Send corresponding key value to LCD
+        }
+    }
+
     return 0;
 }
