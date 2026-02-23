@@ -1,0 +1,5 @@
+# ninja log v7
+41	239	7935153937032136	CMakeFiles/testmpx_default_default_XC8_compile.dir/Z_/CPE3201-Sevilla/MPLABX_TEST/testmpx/main.c.p1	f5786b2041d7f8
+258	1648	7935153939067842	Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/out/testmpx/default.elf	66b5b9dd642e38bc
+59	256	7935154447876919	CMakeFiles/testmpx_default_default_XC8_compile.dir/Z_/CPE3201-Sevilla/MPLABX_TEST/testmpx/main.c.p1	f5786b2041d7f8
+276	1526	7935154450124885	Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/out/testmpx/default.elf	66b5b9dd642e38bc

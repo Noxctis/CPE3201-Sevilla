@@ -1,0 +1,5 @@
+Z:/CPE3201-Sevilla/_build/testlcdandkeypad/default/CMakeFiles/testlcdandkeypad_default_default_XC8_assemble.dir
+Z:/CPE3201-Sevilla/_build/testlcdandkeypad/default/CMakeFiles/testlcdandkeypad_default_default_XC8_compile.dir
+Z:/CPE3201-Sevilla/_build/testlcdandkeypad/default/CMakeFiles/testlcdandkeypad_default_image_t_9AjYvT.dir
+Z:/CPE3201-Sevilla/_build/testlcdandkeypad/default/CMakeFiles/edit_cache.dir
+Z:/CPE3201-Sevilla/_build/testlcdandkeypad/default/CMakeFiles/rebuild_cache.dir

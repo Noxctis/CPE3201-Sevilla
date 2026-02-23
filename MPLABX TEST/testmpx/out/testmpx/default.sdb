@@ -1,0 +1,36 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"10 c:\PROGRA~1\MICROC~1\xc8\v3.10\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 c:\PROGRA~1\MICROC~1\xc8\v3.10\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 c:\PROGRA~1\MICROC~1\xc8\v3.10\pic\sources\c99\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"19 Z:\CPE3201-Sevilla\MPLABX TEST\testmpx\main.c
+[v _main main `(i  1 e 2 0 ]
+"214 C:/Users/cssevilla/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.7.162/xc8\pic\include\proc/pic16f877a.h
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"1323
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1373
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"2227
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+"2658
+[v _RA0 RA0 `VEb  1 e 0 @40 ]
+"2676
+[v _RB0 RB0 `VEb  1 e 0 @48 ]
+"19 Z:\CPE3201-Sevilla\MPLABX TEST\testmpx\main.c
+[v _main main `(i  1 e 2 0 ]
+{
+"23
+[v main@cnt cnt `ui  1 a 2 1 ]
+"22
+[v main@i i `uc  1 a 1 0 ]
+"52
+} 0

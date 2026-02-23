@@ -1,0 +1,5 @@
+Z:/CPE3201-Sevilla/_build/lcdandkeypadactual/default/CMakeFiles/lcdandkeypadactual_default_default_XC8_assemble.dir
+Z:/CPE3201-Sevilla/_build/lcdandkeypadactual/default/CMakeFiles/lcdandkeypadactual_default_default_XC8_compile.dir
+Z:/CPE3201-Sevilla/_build/lcdandkeypadactual/default/CMakeFiles/lcdandkeypadactual_default_image_2l_KzTBK.dir
+Z:/CPE3201-Sevilla/_build/lcdandkeypadactual/default/CMakeFiles/edit_cache.dir
+Z:/CPE3201-Sevilla/_build/lcdandkeypadactual/default/CMakeFiles/rebuild_cache.dir

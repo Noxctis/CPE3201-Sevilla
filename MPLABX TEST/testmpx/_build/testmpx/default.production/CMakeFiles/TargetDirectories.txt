@@ -1,0 +1,4 @@
+Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/_build/testmpx/default.production/CMakeFiles/testmpx_default_default_XC8_compile.dir
+Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/_build/testmpx/default.production/CMakeFiles/testmpx_default_image_6VBe6SAz.dir
+Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/_build/testmpx/default.production/CMakeFiles/edit_cache.dir
+Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/_build/testmpx/default.production/CMakeFiles/rebuild_cache.dir

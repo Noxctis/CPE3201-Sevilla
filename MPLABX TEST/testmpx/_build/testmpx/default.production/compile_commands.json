@@ -1,0 +1,8 @@
+[
+{
+  "directory": "Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/_build/testmpx/default.production",
+  "command": "c:\\PROGRA~1\\MICROC~1\\xc8\\v3.10\\bin\\xc8-cc.exe -DXPRJ_default=default -D__16F877A__ -c -mcpu=16F877A -mdfp=C:/Users/cssevilla/.mchp_packs/Microchip/PIC16Fxxx_DFP/1.7.162/xc8 -fno-short-double -fno-short-float -O0 -maddrqual=ignore -mwarn=-3 -msummary=-psect,-class,+mem,-hex,-file -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits -std=c99 -gdwarf-3 -mstack=compiled:auto:auto -o CMakeFiles\\testmpx_default_default_XC8_compile.dir\\Z_\\CPE3201-Sevilla\\MPLABX_TEST\\testmpx\\main.c.p1 -c \"Z:\\CPE3201-Sevilla\\MPLABX TEST\\testmpx\\main.c\"",
+  "file": "Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/main.c",
+  "output": "Z:/CPE3201-Sevilla/MPLABX TEST/testmpx/_build/testmpx/default.production/CMakeFiles/testmpx_default_default_XC8_compile.dir/Z_/CPE3201-Sevilla/MPLABX_TEST/testmpx/main.c.p1"
+}
+]
