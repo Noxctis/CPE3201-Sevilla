@@ -81,7 +81,7 @@ int main(void){
     //MM74C922 and 3x4 keypad connections
     // Connect MM74C922 outputs to PORTD (RD0-RD7)
     // Connect MM74C922 strobe to RD4 (not used in this code)
-
+    //change later
     while(1){
         if(RD4){ // Check if a key is pressed (strobe signal)
             unsigned char key = PORTD & 0x0F; // Read lower 4 bits for key value
