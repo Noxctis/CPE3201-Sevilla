@@ -58,29 +58,30 @@ void delay(unsigned int ms){
         for(j = 0; j < 1000; j++);
     }
 }
-// 3x4 keypad mapping table (MM74C922 outputs 0-15 linearly)
-const char keypad[] = "123 456 789 *0# ";
-
+// 1. Flatten into a 1D array and use 'const' to save RAM
+const char keypad[16] = {
+    '1', '2', '3', ' ',  // Outputs 0, 1, 2, 3
+    '4', '5', '6', ' ',  // Outputs 4, 5, 6, 7
+    '7', '8', '9', ' ',  // Outputs 8, 9, 10, 11
+    '*', '0', '#', ' '   // Outputs 12, 13, 14, 15
+};
 
 int main(void){
 
-    // Add your code here and press Ctrl + Shift + B to build
-
-	TRISB = 0x00; // set PORTB as output for LCD data
-	TRISC = 0x00; // set PORTC as output for LCD control signals
+    TRISB = 0x00; // set PORTB as output for LCD data
+    TRISC = 0x00; // set PORTC as output for LCD control signals
     TRISD = 0xFF; // set PORTD bits 0-7 as input (for keypad)
 
     initLCD(); 
 
-    //MM74C922 and 3x4 keypad connections
-    // Connect MM74C922 outputs to PORTD (RD0-RD7)
-    // Connect MM74C922 strobe to RD4 (not used in this code)
-    //change later
     while(1){
-        if(RD4){ // Check if a key is pressed (strobe signal)
-            unsigned char key = PORTD & 0x0F; // Read lower 4 bits for key value
-            while(RD4); // Wait until key is released (strobe goes low)
-            dataCtrl(keypad[key]); // Send corresponding key value to LCD
+        if(RD4){ // Check if a key is pressed (DA signal goes high)
+            unsigned char key = PORTD & 0x0F; // Read lower 4 bits (0-15)
+            
+            while(RD4); // Wait until key is released
+            
+            
+            dataCtrl(keypad[key]); 
         }
     }
 
