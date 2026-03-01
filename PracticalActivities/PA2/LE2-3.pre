@@ -1,5 +1,5 @@
 
-# 1 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+# 1 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 
 # 21 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1426,7 +1426,7 @@ extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsi
 extern __nonreentrant void _delay(unsigned long);
 
 
-# 10 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+# 10 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 #pragma config FOSC = XT
 #pragma config WDTE = OFF
 #pragma config PWRTE = ON
@@ -1484,22 +1484,33 @@ const char keypad[] = "123 456 789 *0# ";
 
 int main(void){
 
-
-
 TRISB = 0x00;
 TRISC = 0x00;
 TRISD = 0xFF;
 
 initLCD();
-while(1){
-instCtrl(0xC7);
-dataCtrl('H');
 
-dataCtrl('E');
-dataCtrl('L');
-dataCtrl('L');
-dataCtrl('O');
-dataCtrl('!');
+unsigned char count = 0;
+
+while(1){
+if(RD4){
+unsigned char key = PORTD & 0x0F;
+while(RD4);
+
+if(count == 80){
+instCtrl(0x01);
+delay(2);
+count = 0;
 }
+
+if(count == 20) instCtrl(0xC0);
+else if(count == 40) instCtrl(0x94);
+else if(count == 60) instCtrl(0xD4);
+
+dataCtrl(keypad[key]);
+count++;
+}
+}
+
 return 0;
 }

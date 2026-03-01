@@ -7,7 +7,7 @@
 	;
 	; Compiler options:
 	;
-	; -oPA2.cof -mPA2.map --summary=default --output=default PA2-1.p1 \
+	; -oPA2.cof -mPA2.map --summary=default --output=default LE2-3.p1 \
 	; --chip=16F877A -P --runtime=default --opt=default -N-1 -D__DEBUG=1 -g \
 	; --asmlist --errformat=Error   [%n] %f; %l.%c %s \
 	; --msgformat=Advisory[%n] %s --warnformat=Warning [%n] %f; %l.%c %s

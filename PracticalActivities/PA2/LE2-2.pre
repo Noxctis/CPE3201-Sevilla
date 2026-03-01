@@ -1,5 +1,5 @@
 
-# 1 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+# 1 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-2.c"
 
 # 21 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1426,7 +1426,7 @@ extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsi
 extern __nonreentrant void _delay(unsigned long);
 
 
-# 10 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+# 10 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-2.c"
 #pragma config FOSC = XT
 #pragma config WDTE = OFF
 #pragma config PWRTE = ON
@@ -1436,70 +1436,38 @@ extern __nonreentrant void _delay(unsigned long);
 #pragma config WRT = OFF
 #pragma config CP = OFF
 
+const unsigned char ledMap[16] = {
+1,
+2,
+3,
+0,
+4,
+5,
+6,
+0,
+7,
+8,
+9,
+0,
+15,
+0,
+15,
+0
+};
 
-void initLCD();
-void instCtrl(unsigned char cmd);
-void delay(unsigned int ms);
-void dataCtrl(unsigned char data);
-
-
-void instCtrl(unsigned char cmd){
-PORTB = cmd;
-RC0 = 0;
-RC2 = 0;
-RC1 = 1;
-delay(1);
-RC1 = 0;
-}
-
-void initLCD(){
-
-delay(1);
-instCtrl(0x38);
-instCtrl(0x08);
-instCtrl(0x01);
-instCtrl(0x06);
-instCtrl(0x0F);
-}
-
-void dataCtrl(unsigned char data){
-PORTB = data;
-RC0 = 1;
-RC2 = 0;
-RC1 = 1;
-delay(1);
-RC1 = 0;
-}
-
-void delay(unsigned int ms){
-
-unsigned int i, j;
-for(i = 0; i < ms; i++){
-for(j = 0; j < 1000; j++);
-}
-}
-
-const char keypad[] = "123 456 789 *0# ";
-
-
-int main(void){
-
-
-
-TRISB = 0x00;
-TRISC = 0x00;
+int main(void) {
+TRISA = 0x00;
 TRISD = 0xFF;
 
-initLCD();
-while(1){
-instCtrl(0xC7);
-dataCtrl('H');
+PORTA = 0x00;
 
-dataCtrl('E');
-dataCtrl('L');
-dataCtrl('L');
-dataCtrl('O');
-dataCtrl('!');
+while (1) {
+if (RD4) {
+unsigned char key = PORTD & 0x0F;
+while (RD4);
+PORTA = ledMap[key];
 }
+}
+
 return 0;
 }

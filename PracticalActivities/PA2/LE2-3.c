@@ -1,7 +1,7 @@
 /**
  * @file main.c
  * @author cssevilla
- * @date 2026-02-23
+ * @date 2026-03-01
  * @brief Main function
  */
 
@@ -58,28 +58,39 @@ void delay(unsigned int ms){
         for(j = 0; j < 1000; j++);
     }
 }
-// 3x4 keypad mapping table
+// 3x4 keypad mapping table (MM74C922 outputs 0-15 linearly)
 const char keypad[] = "123 456 789 *0# ";
 
 
 int main(void){
 
-    // Add your code here and press Ctrl + Shift + B to build
+    TRISB = 0x00; // set PORTB as output for LCD data
+    TRISC = 0x00; // set PORTC as output for LCD control signals
+    TRISD = 0xFF; // set PORTD as input: RD3:RD0 = keypad data, RD4 = DAVBL
 
-	TRISB = 0x00; // set PORTB as output for LCD data
-	TRISC = 0x00; // set PORTC as output for LCD control signals
-    TRISD = 0xFF; // set PORTD bits 0-7 as input (for keypad)
+    initLCD();
 
-    initLCD(); 
-while(1){
-	instCtrl(0xC7); // move cursor to 2nd line 7th column
- 	dataCtrl('H'); // prints ‘H’ at current cursor position
-				   // then shifts the cursor to the right*
- 	dataCtrl('E'); // prints ‘E’
- 	dataCtrl('L'); // prints ‘L’
- 	dataCtrl('L'); // prints ‘L’
- 	dataCtrl('O'); // prints ‘O’
-	dataCtrl('!'); // prints ‘!’
-}
+    unsigned char count = 0; // tracks characters written (0-79)
+
+    while(1){
+        if(RD4){ // DAVBL = 1: key is pressed
+            unsigned char key = PORTD & 0x0F; // read lower 4 bits (74C922 address)
+            while(RD4); // wait for key release
+
+            if(count == 80){ // LCD full (20x4), clear and reset
+                instCtrl(0x01); // clear display
+                delay(2);       // clear command needs extra delay (~1.64ms)
+                count = 0;
+            }
+
+            if(count == 20)       instCtrl(0xC0); // move cursor to line 2
+            else if(count == 40)  instCtrl(0x94); // move cursor to line 3
+            else if(count == 60)  instCtrl(0xD4); // move cursor to line 4
+
+            dataCtrl(keypad[key]); // display key character on LCD
+            count++;
+        }
+    }
+
     return 0;
 }

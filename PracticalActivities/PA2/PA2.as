@@ -160,6 +160,7 @@ EECON1 equ 018Ch ;#
 # 2301 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic16f877a.h"
 EECON2 equ 018Dh ;# 
 	FNCALL	_main,_dataCtrl
+	FNCALL	_main,_delay
 	FNCALL	_main,_initLCD
 	FNCALL	_main,_instCtrl
 	FNCALL	_initLCD,_delay
@@ -187,7 +188,7 @@ __stringbase:
 psect	strings
 	global    __end_of__stringtab
 __end_of__stringtab:
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	62
 _keypad:
 	retlw	031h
@@ -212,12 +213,16 @@ __end_of_keypad:
 	global	_keypad
 	global	_PORTB
 _PORTB	set	0x6
+	global	_PORTD
+_PORTD	set	0x8
 	global	_RC0
 _RC0	set	0x38
 	global	_RC1
 _RC1	set	0x39
 	global	_RC2
 _RC2	set	0x3A
+	global	_RD4
+_RD4	set	0x44
 	global	_TRISB
 _TRISB	set	0x86
 	global	_TRISC
@@ -284,6 +289,13 @@ dataCtrl@data:	; 1 bytes @ 0x6
 	ds	1
 ??_initLCD:	; 0 bytes @ 0x7
 ??_main:	; 0 bytes @ 0x7
+	ds	1
+	global	main@key
+main@key:	; 1 bytes @ 0x8
+	ds	1
+	global	main@count
+main@count:	; 1 bytes @ 0x9
+	ds	1
 ;!
 ;!Data Sizes:
 ;!    Strings     0
@@ -295,7 +307,7 @@ dataCtrl@data:	; 1 bytes @ 0x6
 ;!
 ;!Auto Spaces:
 ;!    Space          Size  Autos    Used
-;!    COMMON           14      7       7
+;!    COMMON           14     10      10
 ;!    BANK0            80      0       0
 ;!    BANK1            80      0       0
 ;!    BANK3            96      0       0
@@ -333,7 +345,7 @@ dataCtrl@data:	; 1 bytes @ 0x6
 ;!    None.
 
 ;;
-;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
 ;;
 
 ;!
@@ -342,24 +354,26 @@ dataCtrl@data:	; 1 bytes @ 0x6
 ;! ---------------------------------------------------------------------------------
 ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;! ---------------------------------------------------------------------------------
-;! (0) _main                                                 0     0      0     801
+;! (0) _main                                                 3     3      0    1280
+;!                                              7 COMMON     3     3      0
 ;!                           _dataCtrl
+;!                              _delay
 ;!                            _initLCD
 ;!                           _instCtrl
 ;! ---------------------------------------------------------------------------------
-;! (1) _initLCD                                              0     0      0     393
+;! (1) _initLCD                                              0     0      0     479
 ;!                              _delay
 ;!                           _instCtrl
 ;! ---------------------------------------------------------------------------------
-;! (1) _instCtrl                                             1     1      0     204
+;! (1) _instCtrl                                             1     1      0     247
 ;!                                              6 COMMON     1     1      0
 ;!                              _delay
 ;! ---------------------------------------------------------------------------------
-;! (1) _dataCtrl                                             1     1      0     204
+;! (1) _dataCtrl                                             1     1      0     247
 ;!                                              6 COMMON     1     1      0
 ;!                              _delay
 ;! ---------------------------------------------------------------------------------
-;! (2) _delay                                                6     4      2     189
+;! (2) _delay                                                6     4      2     232
 ;!                                              0 COMMON     6     4      2
 ;! ---------------------------------------------------------------------------------
 ;! Estimated maximum stack depth 2
@@ -370,6 +384,7 @@ dataCtrl@data:	; 1 bytes @ 0x6
 ;! _main (ROOT)
 ;!   _dataCtrl
 ;!     _delay
+;!   _delay
 ;!   _initLCD
 ;!     _delay
 ;!     _instCtrl
@@ -385,7 +400,7 @@ dataCtrl@data:	; 1 bytes @ 0x6
 ;!EEDATA             100      0       0       0        0.0%
 ;!NULL                 0      0       0       0        0.0%
 ;!CODE                 0      0       0       0        0.0%
-;!COMMON               E      7       7       1       50.0%
+;!COMMON               E      A       A       1       71.4%
 ;!BITSFR0              0      0       0       1        0.0%
 ;!SFR0                 0      0       0       1        0.0%
 ;!BITSFR1              0      0       0       2        0.0%
@@ -410,28 +425,30 @@ dataCtrl@data:	; 1 bytes @ 0x6
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 65 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+;;		line 65 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
-;;		None
+;;  key             1    8[COMMON] unsigned char 
+;;  count           1    9[COMMON] unsigned char 
 ;; Return value:  Size  Location     Type
-;;                  2   37[COMMON] int 
+;;                  2   41[COMMON] int 
 ;; Registers used:
-;;		wreg, status,2, status,0, pclath, cstack
+;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
 ;; Tracked objects:
 ;;		On entry : 17F/0
 ;;		On exit  : 0/0
 ;;		Unchanged: 0/0
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
 ;;      Params:         0       0       0       0       0
-;;      Locals:         0       0       0       0       0
-;;      Temps:          0       0       0       0       0
-;;      Totals:         0       0       0       0       0
-;;Total ram usage:        0 bytes
+;;      Locals:         2       0       0       0       0
+;;      Temps:          1       0       0       0       0
+;;      Totals:         3       0       0       0       0
+;;Total ram usage:        3 bytes
 ;; Hardware stack levels required when called:    3
 ;; This function calls:
 ;;		_dataCtrl
+;;		_delay
 ;;		_initLCD
 ;;		_instCtrl
 ;; This function is called by:
@@ -439,12 +456,12 @@ dataCtrl@data:	; 1 bytes @ 0x6
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext,global,class=CODE,delta=2,split=1
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	65
 global __pmaintext
 __pmaintext:	;psect for function _main
 psect	maintext
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	65
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
@@ -452,89 +469,209 @@ psect	maintext
 _main:	
 ;incstack = 0
 	opt	stack 5
-; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
-	line	69
+; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+	line	67
 	
-l536:	
-;PA2-1.c: 69: TRISB = 0x00;
+l550:	
+;LE2-3.c: 67: TRISB = 0x00;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	clrf	(134)^080h	;volatile
-	line	70
-;PA2-1.c: 70: TRISC = 0x00;
+	line	68
+;LE2-3.c: 68: TRISC = 0x00;
 	clrf	(135)^080h	;volatile
-	line	71
-	
-l538:	
-;PA2-1.c: 71: TRISD = 0xFF;
-	movlw	(0FFh)
-	movwf	(136)^080h	;volatile
-	line	73
-	
-l540:	
-;PA2-1.c: 73: initLCD();
-	fcall	_initLCD
-	goto	l542
-	line	74
-;PA2-1.c: 74: while(1){
-	
-l38:	
-	line	75
-	
-l542:	
-;PA2-1.c: 75: instCtrl(0xC6);
-	movlw	(0C6h)
-	fcall	_instCtrl
-	line	76
-	
-l544:	
-;PA2-1.c: 76: dataCtrl('H');
-	movlw	(048h)
-	fcall	_dataCtrl
-	line	78
-	
-l546:	
-;PA2-1.c: 78: dataCtrl('E');
-	movlw	(045h)
-	fcall	_dataCtrl
-	line	79
-	
-l548:	
-;PA2-1.c: 79: dataCtrl('L');
-	movlw	(04Ch)
-	fcall	_dataCtrl
-	line	80
-	
-l550:	
-;PA2-1.c: 80: dataCtrl('L');
-	movlw	(04Ch)
-	fcall	_dataCtrl
-	line	81
+	line	69
 	
 l552:	
-;PA2-1.c: 81: dataCtrl('O');
-	movlw	(04Fh)
-	fcall	_dataCtrl
-	line	82
+;LE2-3.c: 69: TRISD = 0xFF;
+	movlw	(0FFh)
+	movwf	(136)^080h	;volatile
+	line	71
 	
 l554:	
-;PA2-1.c: 82: dataCtrl('!');
-	movlw	(021h)
-	fcall	_dataCtrl
-	goto	l542
+;LE2-3.c: 71: initLCD();
+	fcall	_initLCD
+	line	73
+	
+l556:	
+;LE2-3.c: 73: unsigned char count = 0;
+	clrf	(main@count)
+	goto	l558
+	line	75
+;LE2-3.c: 75: while(1){
+	
+l42:	
+	line	76
+	
+l558:	
+;LE2-3.c: 76: if(RD4){
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	btfss	(68/8),(68)&7	;volatile
+	goto	u41
+	goto	u40
+u41:
+	goto	l558
+u40:
+	line	77
+	
+l560:	
+;LE2-3.c: 77: unsigned char key = PORTD & 0x0F;
+	movf	(8),w	;volatile
+	andlw	0Fh
+	movwf	(??_main+0)+0
+	movf	(??_main+0)+0,w
+	movwf	(main@key)
+	line	78
+;LE2-3.c: 78: while(RD4);
+	goto	l44
+	
+l45:	
+	
+l44:	
+	btfsc	(68/8),(68)&7	;volatile
+	goto	u51
+	goto	u50
+u51:
+	goto	l44
+u50:
+	goto	l562
+	
+l46:	
+	line	80
+	
+l562:	
+;LE2-3.c: 80: if(count == 80){
+	movf	(main@count),w
+	xorlw	050h
+	skipz
+	goto	u61
+	goto	u60
+u61:
+	goto	l568
+u60:
+	line	81
+	
+l564:	
+;LE2-3.c: 81: instCtrl(0x01);
+	movlw	(01h)
+	fcall	_instCtrl
+	line	82
+;LE2-3.c: 82: delay(2);
+	movlw	low(02h)
+	movwf	(delay@ms)
+	movlw	high(02h)
+	movwf	((delay@ms))+1
+	fcall	_delay
 	line	83
 	
-l39:	
-	line	74
-	goto	l542
+l566:	
+;LE2-3.c: 83: count = 0;
+	clrf	(main@count)
+	goto	l568
+	line	84
 	
-l40:	
-	line	85
-;PA2-1.c: 83: }
-;PA2-1.c: 84: return 0;
+l47:	
+	line	86
+	
+l568:	
+;LE2-3.c: 84: }
+;LE2-3.c: 86: if(count == 20) instCtrl(0xC0);
+	movf	(main@count),w
+	xorlw	014h
+	skipz
+	goto	u71
+	goto	u70
+u71:
+	goto	l572
+u70:
+	
+l570:	
+	movlw	(0C0h)
+	fcall	_instCtrl
+	goto	l580
+	line	87
+	
+l48:	
+	
+l572:	
+;LE2-3.c: 87: else if(count == 40) instCtrl(0x94);
+	movf	(main@count),w
+	xorlw	028h
+	skipz
+	goto	u81
+	goto	u80
+u81:
+	goto	l576
+u80:
+	
+l574:	
+	movlw	(094h)
+	fcall	_instCtrl
+	goto	l580
+	line	88
+	
+l50:	
+	
+l576:	
+;LE2-3.c: 88: else if(count == 60) instCtrl(0xD4);
+	movf	(main@count),w
+	xorlw	03Ch
+	skipz
+	goto	u91
+	goto	u90
+u91:
+	goto	l580
+u90:
+	
+l578:	
+	movlw	(0D4h)
+	fcall	_instCtrl
+	goto	l580
+	
+l52:	
+	goto	l580
+	line	90
+	
+l51:	
+	goto	l580
+	
+l49:	
+	
+l580:	
+;LE2-3.c: 90: dataCtrl(keypad[key]);
+	movf	(main@key),w
+	addlw	low((_keypad)-__stringbase)
+	movwf	fsr0
+	fcall	stringdir
+	fcall	_dataCtrl
+	line	91
+	
+l582:	
+;LE2-3.c: 91: count++;
+	movlw	(01h)
+	movwf	(??_main+0)+0
+	movf	(??_main+0)+0,w
+	addwf	(main@count),f
+	goto	l558
+	line	92
+	
+l43:	
+	goto	l558
+	line	93
+	
+l53:	
+	line	75
+	goto	l558
+	
+l54:	
+	line	96
+;LE2-3.c: 92: }
+;LE2-3.c: 93: }
+;LE2-3.c: 95: return 0;
 ;	Return value of _main is never used
 	
-l41:	
+l55:	
 	global	start
 	ljmp	start
 	opt stack 0
@@ -545,7 +682,7 @@ GLOBAL	__end_of_main
 
 ;; *************** function _initLCD *****************
 ;; Defined at:
-;;		line 35 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+;;		line 35 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -578,7 +715,7 @@ psect	text1,local,class=CODE,delta=2,merge=1
 global __ptext1
 __ptext1:	;psect for function _initLCD
 psect	text1
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	35
 	global	__size_of_initLCD
 	__size_of_initLCD	equ	__end_of_initLCD-_initLCD
@@ -589,36 +726,36 @@ _initLCD:
 ; Regs used in _initLCD: [wreg+status,2+status,0+pclath+cstack]
 	line	37
 	
-l522:	
-;PA2-1.c: 37: delay(1);
+l536:	
+;LE2-3.c: 37: delay(1);
 	movlw	low(01h)
 	movwf	(delay@ms)
 	movlw	high(01h)
 	movwf	((delay@ms))+1
 	fcall	_delay
 	line	38
-;PA2-1.c: 38: instCtrl(0x38);
+;LE2-3.c: 38: instCtrl(0x38);
 	movlw	(038h)
 	fcall	_instCtrl
 	line	39
-;PA2-1.c: 39: instCtrl(0x08);
+;LE2-3.c: 39: instCtrl(0x08);
 	movlw	(08h)
 	fcall	_instCtrl
 	line	40
-;PA2-1.c: 40: instCtrl(0x01);
+;LE2-3.c: 40: instCtrl(0x01);
 	movlw	(01h)
 	fcall	_instCtrl
 	line	41
-;PA2-1.c: 41: instCtrl(0x06);
+;LE2-3.c: 41: instCtrl(0x06);
 	movlw	(06h)
 	fcall	_instCtrl
 	line	42
-;PA2-1.c: 42: instCtrl(0x0F);
+;LE2-3.c: 42: instCtrl(0x0F);
 	movlw	(0Fh)
 	fcall	_instCtrl
 	line	43
 	
-l22:	
+l26:	
 	return
 	opt stack 0
 GLOBAL	__end_of_initLCD
@@ -628,7 +765,7 @@ GLOBAL	__end_of_initLCD
 
 ;; *************** function _instCtrl *****************
 ;; Defined at:
-;;		line 26 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+;;		line 26 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;  cmd             1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -661,7 +798,7 @@ psect	text2,local,class=CODE,delta=2,merge=1
 global __ptext2
 __ptext2:	;psect for function _instCtrl
 psect	text2
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	26
 	global	__size_of_instCtrl
 	__size_of_instCtrl	equ	__end_of_instCtrl-_instCtrl
@@ -674,31 +811,31 @@ _instCtrl:
 	movwf	(instCtrl@cmd)
 	line	27
 	
-l510:	
-;PA2-1.c: 27: PORTB = cmd;
+l524:	
+;LE2-3.c: 27: PORTB = cmd;
 	movf	(instCtrl@cmd),w
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(6)	;volatile
 	line	28
 	
-l512:	
-;PA2-1.c: 28: RC0 = 0;
+l526:	
+;LE2-3.c: 28: RC0 = 0;
 	bcf	(56/8),(56)&7	;volatile
 	line	29
 	
-l514:	
-;PA2-1.c: 29: RC2 = 0;
+l528:	
+;LE2-3.c: 29: RC2 = 0;
 	bcf	(58/8),(58)&7	;volatile
 	line	30
 	
-l516:	
-;PA2-1.c: 30: RC1 = 1;
+l530:	
+;LE2-3.c: 30: RC1 = 1;
 	bsf	(57/8),(57)&7	;volatile
 	line	31
 	
-l518:	
-;PA2-1.c: 31: delay(1);
+l532:	
+;LE2-3.c: 31: delay(1);
 	movlw	low(01h)
 	movwf	(delay@ms)
 	movlw	high(01h)
@@ -706,14 +843,14 @@ l518:
 	fcall	_delay
 	line	32
 	
-l520:	
-;PA2-1.c: 32: RC1 = 0;
+l534:	
+;LE2-3.c: 32: RC1 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bcf	(57/8),(57)&7	;volatile
 	line	33
 	
-l19:	
+l23:	
 	return
 	opt stack 0
 GLOBAL	__end_of_instCtrl
@@ -723,7 +860,7 @@ GLOBAL	__end_of_instCtrl
 
 ;; *************** function _dataCtrl *****************
 ;; Defined at:
-;;		line 45 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+;;		line 45 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;  data            1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -755,7 +892,7 @@ psect	text3,local,class=CODE,delta=2,merge=1
 global __ptext3
 __ptext3:	;psect for function _dataCtrl
 psect	text3
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	45
 	global	__size_of_dataCtrl
 	__size_of_dataCtrl	equ	__end_of_dataCtrl-_dataCtrl
@@ -768,31 +905,31 @@ _dataCtrl:
 	movwf	(dataCtrl@data)
 	line	46
 	
-l524:	
-;PA2-1.c: 46: PORTB = data;
+l538:	
+;LE2-3.c: 46: PORTB = data;
 	movf	(dataCtrl@data),w
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(6)	;volatile
 	line	47
 	
-l526:	
-;PA2-1.c: 47: RC0 = 1;
+l540:	
+;LE2-3.c: 47: RC0 = 1;
 	bsf	(56/8),(56)&7	;volatile
 	line	48
 	
-l528:	
-;PA2-1.c: 48: RC2 = 0;
+l542:	
+;LE2-3.c: 48: RC2 = 0;
 	bcf	(58/8),(58)&7	;volatile
 	line	49
 	
-l530:	
-;PA2-1.c: 49: RC1 = 1;
+l544:	
+;LE2-3.c: 49: RC1 = 1;
 	bsf	(57/8),(57)&7	;volatile
 	line	50
 	
-l532:	
-;PA2-1.c: 50: delay(1);
+l546:	
+;LE2-3.c: 50: delay(1);
 	movlw	low(01h)
 	movwf	(delay@ms)
 	movlw	high(01h)
@@ -800,14 +937,14 @@ l532:
 	fcall	_delay
 	line	51
 	
-l534:	
-;PA2-1.c: 51: RC1 = 0;
+l548:	
+;LE2-3.c: 51: RC1 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	bcf	(57/8),(57)&7	;volatile
 	line	52
 	
-l25:	
+l29:	
 	return
 	opt stack 0
 GLOBAL	__end_of_dataCtrl
@@ -817,7 +954,7 @@ GLOBAL	__end_of_dataCtrl
 
 ;; *************** function _delay *****************
 ;; Defined at:
-;;		line 54 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+;;		line 54 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;  ms              2    0[COMMON] unsigned int 
 ;; Auto vars:     Size  Location     Type
@@ -844,6 +981,7 @@ GLOBAL	__end_of_dataCtrl
 ;;		_instCtrl
 ;;		_initLCD
 ;;		_dataCtrl
+;;		_main
 ;; This function uses a non-reentrant model
 ;;
 psect	text4,local,class=CODE,delta=2,merge=1
@@ -851,7 +989,7 @@ psect	text4,local,class=CODE,delta=2,merge=1
 global __ptext4
 __ptext4:	;psect for function _delay
 psect	text4
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	54
 	global	__size_of_delay
 	__size_of_delay	equ	__end_of_delay-_delay
@@ -862,22 +1000,22 @@ _delay:
 ; Regs used in _delay: [wreg+status,2]
 	line	57
 	
-l498:	
-;PA2-1.c: 56: unsigned int i, j;
-;PA2-1.c: 57: for(i = 0; i < ms; i++){
+l512:	
+;LE2-3.c: 56: unsigned int i, j;
+;LE2-3.c: 57: for(i = 0; i < ms; i++){
 	clrf	(delay@i)
 	clrf	(delay@i+1)
-	goto	l28
+	goto	l32
 	
-l29:	
+l33:	
 	line	58
 	
-l500:	
-;PA2-1.c: 58: for(j = 0; j < 1000; j++);
+l514:	
+;LE2-3.c: 58: for(j = 0; j < 1000; j++);
 	clrf	(delay@j)
 	clrf	(delay@j+1)
 	
-l502:	
+l516:	
 	movlw	high(03E8h)
 	subwf	(delay@j+1),w
 	movlw	low(03E8h)
@@ -887,16 +1025,16 @@ l502:
 	goto	u11
 	goto	u10
 u11:
-	goto	l506
+	goto	l520
 u10:
-	goto	l508
+	goto	l522
 	
-l504:	
-	goto	l508
+l518:	
+	goto	l522
 	
-l30:	
+l34:	
 	
-l506:	
+l520:	
 	movlw	low(01h)
 	addwf	(delay@j),f
 	skipnc
@@ -912,14 +1050,14 @@ l506:
 	goto	u21
 	goto	u20
 u21:
-	goto	l506
+	goto	l520
 u20:
-	goto	l508
+	goto	l522
 	
-l31:	
+l35:	
 	line	57
 	
-l508:	
+l522:	
 	movlw	low(01h)
 	addwf	(delay@i),f
 	skipnc
@@ -927,7 +1065,7 @@ l508:
 	movlw	high(01h)
 	addwf	(delay@i+1),f
 	
-l28:	
+l32:	
 	movf	(delay@ms+1),w
 	subwf	(delay@i+1),w
 	skipz
@@ -939,14 +1077,14 @@ u35:
 	goto	u31
 	goto	u30
 u31:
-	goto	l500
+	goto	l514
 u30:
-	goto	l33
+	goto	l37
 	
-l32:	
+l36:	
 	line	60
 	
-l33:	
+l37:	
 	return
 	opt stack 0
 GLOBAL	__end_of_delay

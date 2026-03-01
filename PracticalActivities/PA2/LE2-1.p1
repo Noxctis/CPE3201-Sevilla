@@ -7,7 +7,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RC2 `Vb ~T0 @X0 0 e@58 ]
 "2533
 [v _RC1 `Vb ~T0 @X0 0 e@57 ]
-"22 C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c
+"22 C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-1.c
 [v _delay `(v ~T0 @X0 0 ef1`ui ]
 [p mainexit ]
 "1335 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic16f877a.h
@@ -1029,7 +1029,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, __eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern __nonreentrant void _delay(unsigned long);
-"10 C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c
+"10 C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-1.c
 [p x FOSC=XT ]
 "11
 [p x WDTE=OFF ]
@@ -1045,115 +1045,115 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x WRT=OFF ]
 "17
 [p x CP=OFF ]
-[; ;PA2-1.c: 20: void initLCD();
-[; ;PA2-1.c: 21: void instCtrl(unsigned char cmd);
-[; ;PA2-1.c: 22: void delay(unsigned int ms);
-[; ;PA2-1.c: 23: void dataCtrl(unsigned char data);
+[; ;LE2-1.c: 20: void initLCD();
+[; ;LE2-1.c: 21: void instCtrl(unsigned char cmd);
+[; ;LE2-1.c: 22: void delay(unsigned int ms);
+[; ;LE2-1.c: 23: void dataCtrl(unsigned char data);
 "26
 [v _instCtrl `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;PA2-1.c: 26: void instCtrl(unsigned char cmd){
+[; ;LE2-1.c: 26: void instCtrl(unsigned char cmd){
 [e :U _instCtrl ]
 [v _cmd `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;PA2-1.c: 27: PORTB = cmd;
+[; ;LE2-1.c: 27: PORTB = cmd;
 "27
 [e = _PORTB _cmd ]
-[; ;PA2-1.c: 28: RC0 = 0;
+[; ;LE2-1.c: 28: RC0 = 0;
 "28
 [e = _RC0 -> -> 0 `i `b ]
-[; ;PA2-1.c: 29: RC2 = 0;
+[; ;LE2-1.c: 29: RC2 = 0;
 "29
 [e = _RC2 -> -> 0 `i `b ]
-[; ;PA2-1.c: 30: RC1 = 1;
+[; ;LE2-1.c: 30: RC1 = 1;
 "30
 [e = _RC1 -> -> 1 `i `b ]
-[; ;PA2-1.c: 31: delay(1);
+[; ;LE2-1.c: 31: delay(1);
 "31
 [e ( _delay (1 -> -> 1 `i `ui ]
-[; ;PA2-1.c: 32: RC1 = 0;
+[; ;LE2-1.c: 32: RC1 = 0;
 "32
 [e = _RC1 -> -> 0 `i `b ]
-[; ;PA2-1.c: 33: }
+[; ;LE2-1.c: 33: }
 "33
 [e :UE 96 ]
 }
 "35
 [v _initLCD `(v ~T0 @X0 1 ef ]
 {
-[; ;PA2-1.c: 35: void initLCD(){
+[; ;LE2-1.c: 35: void initLCD(){
 [e :U _initLCD ]
 [f ]
-[; ;PA2-1.c: 37: delay(1);
+[; ;LE2-1.c: 37: delay(1);
 "37
 [e ( _delay (1 -> -> 1 `i `ui ]
-[; ;PA2-1.c: 38: instCtrl(0x38);
+[; ;LE2-1.c: 38: instCtrl(0x38);
 "38
 [e ( _instCtrl (1 -> -> 56 `i `uc ]
-[; ;PA2-1.c: 39: instCtrl(0x08);
+[; ;LE2-1.c: 39: instCtrl(0x08);
 "39
 [e ( _instCtrl (1 -> -> 8 `i `uc ]
-[; ;PA2-1.c: 40: instCtrl(0x01);
+[; ;LE2-1.c: 40: instCtrl(0x01);
 "40
 [e ( _instCtrl (1 -> -> 1 `i `uc ]
-[; ;PA2-1.c: 41: instCtrl(0x06);
+[; ;LE2-1.c: 41: instCtrl(0x06);
 "41
 [e ( _instCtrl (1 -> -> 6 `i `uc ]
-[; ;PA2-1.c: 42: instCtrl(0x0F);
+[; ;LE2-1.c: 42: instCtrl(0x0F);
 "42
 [e ( _instCtrl (1 -> -> 15 `i `uc ]
-[; ;PA2-1.c: 43: }
+[; ;LE2-1.c: 43: }
 "43
 [e :UE 97 ]
 }
 "45
 [v _dataCtrl `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;PA2-1.c: 45: void dataCtrl(unsigned char data){
+[; ;LE2-1.c: 45: void dataCtrl(unsigned char data){
 [e :U _dataCtrl ]
 [v _data `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;PA2-1.c: 46: PORTB = data;
+[; ;LE2-1.c: 46: PORTB = data;
 "46
 [e = _PORTB _data ]
-[; ;PA2-1.c: 47: RC0 = 1;
+[; ;LE2-1.c: 47: RC0 = 1;
 "47
 [e = _RC0 -> -> 1 `i `b ]
-[; ;PA2-1.c: 48: RC2 = 0;
+[; ;LE2-1.c: 48: RC2 = 0;
 "48
 [e = _RC2 -> -> 0 `i `b ]
-[; ;PA2-1.c: 49: RC1 = 1;
+[; ;LE2-1.c: 49: RC1 = 1;
 "49
 [e = _RC1 -> -> 1 `i `b ]
-[; ;PA2-1.c: 50: delay(1);
+[; ;LE2-1.c: 50: delay(1);
 "50
 [e ( _delay (1 -> -> 1 `i `ui ]
-[; ;PA2-1.c: 51: RC1 = 0;
+[; ;LE2-1.c: 51: RC1 = 0;
 "51
 [e = _RC1 -> -> 0 `i `b ]
-[; ;PA2-1.c: 52: }
+[; ;LE2-1.c: 52: }
 "52
 [e :UE 98 ]
 }
 "54
 [v _delay `(v ~T0 @X0 1 ef1`ui ]
 {
-[; ;PA2-1.c: 54: void delay(unsigned int ms){
+[; ;LE2-1.c: 54: void delay(unsigned int ms){
 [e :U _delay ]
 [v _ms `ui ~T0 @X0 1 r1 ]
 [f ]
 "56
 [v _i `ui ~T0 @X0 1 a ]
 [v _j `ui ~T0 @X0 1 a ]
-[; ;PA2-1.c: 56: unsigned int i, j;
-[; ;PA2-1.c: 57: for(i = 0; i < ms; i++){
+[; ;LE2-1.c: 56: unsigned int i, j;
+[; ;LE2-1.c: 57: for(i = 0; i < ms; i++){
 "57
 {
 [e = _i -> -> 0 `i `ui ]
 [e $U 103  ]
 [e :U 100 ]
 {
-[; ;PA2-1.c: 58: for(j = 0; j < 1000; j++);
+[; ;LE2-1.c: 58: for(j = 0; j < 1000; j++);
 "58
 {
 [e = _j -> -> 0 `i `ui ]
@@ -1173,8 +1173,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 101 ]
 "59
 }
-[; ;PA2-1.c: 59: }
-[; ;PA2-1.c: 60: }
+[; ;LE2-1.c: 59: }
+[; ;LE2-1.c: 60: }
 "60
 [e :UE 99 ]
 }
@@ -1201,48 +1201,48 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-[; ;PA2-1.c: 62: const char keypad[] = "123 456 789 *0# ";
+[; ;LE2-1.c: 62: const char keypad[] = "123 456 789 *0# ";
 "65
 [v _main `(i ~T0 @X0 1 ef ]
 {
-[; ;PA2-1.c: 65: int main(void){
+[; ;LE2-1.c: 65: int main(void){
 [e :U _main ]
 [f ]
-[; ;PA2-1.c: 69: TRISB = 0x00;
+[; ;LE2-1.c: 69: TRISB = 0x00;
 "69
 [e = _TRISB -> -> 0 `i `uc ]
-[; ;PA2-1.c: 70: TRISC = 0x00;
+[; ;LE2-1.c: 70: TRISC = 0x00;
 "70
 [e = _TRISC -> -> 0 `i `uc ]
-[; ;PA2-1.c: 71: TRISD = 0xFF;
+[; ;LE2-1.c: 71: TRISD = 0xFF;
 "71
 [e = _TRISD -> -> 255 `i `uc ]
-[; ;PA2-1.c: 73: initLCD();
+[; ;LE2-1.c: 73: initLCD();
 "73
 [e ( _initLCD ..  ]
-[; ;PA2-1.c: 74: while(1){
+[; ;LE2-1.c: 74: while(1){
 "74
 [e :U 109 ]
 {
-[; ;PA2-1.c: 75: instCtrl(0xC7);
+[; ;LE2-1.c: 75: instCtrl(0xC7);
 "75
 [e ( _instCtrl (1 -> -> 199 `i `uc ]
-[; ;PA2-1.c: 76: dataCtrl('H');
+[; ;LE2-1.c: 76: dataCtrl('H');
 "76
 [e ( _dataCtrl (1 -> -> 72 `ui `uc ]
-[; ;PA2-1.c: 78: dataCtrl('E');
+[; ;LE2-1.c: 78: dataCtrl('E');
 "78
 [e ( _dataCtrl (1 -> -> 69 `ui `uc ]
-[; ;PA2-1.c: 79: dataCtrl('L');
+[; ;LE2-1.c: 79: dataCtrl('L');
 "79
 [e ( _dataCtrl (1 -> -> 76 `ui `uc ]
-[; ;PA2-1.c: 80: dataCtrl('L');
+[; ;LE2-1.c: 80: dataCtrl('L');
 "80
 [e ( _dataCtrl (1 -> -> 76 `ui `uc ]
-[; ;PA2-1.c: 81: dataCtrl('O');
+[; ;LE2-1.c: 81: dataCtrl('O');
 "81
 [e ( _dataCtrl (1 -> -> 79 `ui `uc ]
-[; ;PA2-1.c: 82: dataCtrl('!');
+[; ;LE2-1.c: 82: dataCtrl('!');
 "82
 [e ( _dataCtrl (1 -> -> 33 `ui `uc ]
 "83
@@ -1251,12 +1251,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "74
 [e $U 109  ]
 [e :U 110 ]
-[; ;PA2-1.c: 83: }
-[; ;PA2-1.c: 84: return 0;
+[; ;LE2-1.c: 83: }
+[; ;LE2-1.c: 84: return 0;
 "84
 [e ) -> 0 `i ]
 [e $UE 107  ]
-[; ;PA2-1.c: 85: }
+[; ;LE2-1.c: 85: }
 "85
 [e :UE 107 ]
 }

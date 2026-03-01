@@ -1,5 +1,5 @@
 
-# 1 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+# 1 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-1.c"
 
 # 21 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1426,7 +1426,7 @@ extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsi
 extern __nonreentrant void _delay(unsigned long);
 
 
-# 10 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\PA2-1.c"
+# 10 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-1.c"
 #pragma config FOSC = XT
 #pragma config WDTE = OFF
 #pragma config PWRTE = ON
