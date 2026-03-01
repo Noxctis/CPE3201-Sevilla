@@ -58,14 +58,8 @@ void delay(unsigned int ms){
         for(j = 0; j < 1000; j++);
     }
 }
-//3x4 keypad mapping table
-
-char keypad[4][4] = {
-    {'1', '2', '3', ' '},
-    {'4', '5', '6', ' '},
-    {'7', '8', '9', ' '},
-    {'*', '0', '#', ' '}
-};
+// 3x4 keypad mapping table (MM74C922 outputs 0-15 linearly)
+const char keypad[] = "123 456 789 *0# ";
 
 
 int main(void){
@@ -86,7 +80,7 @@ int main(void){
         if(RD4){ // Check if a key is pressed (strobe signal)
             unsigned char key = PORTD & 0x0F; // Read lower 4 bits for key value
             while(RD4); // Wait until key is released (strobe goes low)
-            dataCtrl(keypad[key/4][key%4]); // Send corresponding key value to LCD
+            dataCtrl(keypad[key]); // Send corresponding key value to LCD
         }
     }
 
