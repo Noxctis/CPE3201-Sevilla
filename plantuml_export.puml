@@ -1,0 +1,49 @@
+@startuml
+start
+
+:main();
+:Configure TRISB = 0x00 (LCD data out);
+:Configure TRISC = 0x00 (LCD control out);
+:Configure TRISD = 0xFF (Keypad in);
+
+:Call initLCD();
+note right
+initLCD() calls instCtrl() several times
+to send setup commands to LCD
+end note
+
+:count = 0;
+
+while (Forever Loop)
+  if (RD4 == 1?) then (Yes)
+    :Read key = PORTD & 0x0F;
+    :Wait for key release;
+
+    if (count == 80?) then (Yes)
+      :Call instCtrl(0x01) to clear LCD;
+      :Call delay(2);
+      :Reset count = 0;
+    endif
+
+    if (count == 20?) then (Yes)
+      :Call instCtrl(0xC0) (cursor line 2);
+    elseif (count == 40?) then (Yes)
+      :Call instCtrl(0x94) (cursor line 3);
+    elseif (count == 60?) then (Yes)
+      :Call instCtrl(0xD4) (cursor line 4);
+    endif
+
+    :Call dataCtrl(keypad[key]);
+    note right
+    dataCtrl() internally calls delay()
+    after latching data to LCD
+    end note
+
+    :Increment count;
+  else (No)
+    :Continue polling keypad;
+  endif
+endwhile
+
+stop
+@enduml

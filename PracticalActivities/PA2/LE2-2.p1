@@ -1023,7 +1023,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, __eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern __nonreentrant void _delay(unsigned long);
-"10 C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-2.c
+"10 Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-2.c
 [p x FOSC=XT ]
 "11
 [p x WDTE=OFF ]

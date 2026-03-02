@@ -4,7 +4,7 @@ Linker command line:
 
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.33\dat\en_msgs.txt -cs \
   -h+PA2.sym --cmf=PA2.cmf -z -Q16F877A \
-  -oC:\Users\CHRYSS~1\AppData\Local\Temp\s7b4.6 -MPA2.map -E1 -ver=XC8 \
+  -oC:\Users\CSSEVI~1\AppData\Local\Temp\sgng.6 -MPA2.map -E1 -ver=XC8 \
   -ASTACK=0110h-016fh -pstack=STACK -ACONST=00h-0FFhx32 -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -AENTRY=00h-0FFhx32 -ASTRING=00h-0FFhx32 \
   -ACOMMON=070h-07Fh -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh \
@@ -298,7 +298,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 65 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+		line 65 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -331,7 +331,7 @@ Total ram usage:        3 bytes
 
  *************** function _initLCD *****************
  Defined at:
-		line 35 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+		line 35 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -362,7 +362,7 @@ Total ram usage:        0 bytes
 
  *************** function _instCtrl *****************
  Defined at:
-		line 26 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+		line 26 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
  Parameters:    Size  Location     Type
   cmd             1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -393,7 +393,7 @@ Total ram usage:        1 bytes
 
  *************** function _dataCtrl *****************
  Defined at:
-		line 45 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+		line 45 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
  Parameters:    Size  Location     Type
   data            1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -423,7 +423,7 @@ Total ram usage:        1 bytes
 
  *************** function _delay *****************
  Defined at:
-		line 54 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+		line 54 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
  Parameters:    Size  Location     Type
   ms              2    0[COMMON] unsigned int 
  Auto vars:     Size  Location     Type
@@ -458,14 +458,14 @@ Total ram usage:        6 bytes
 MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
-C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c
+Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c
 		_delay         		CODE           	0782	0000	39
 		_main          		CODE           	07A9	0000	83
 		_instCtrl      		CODE           	0749	0000	19
 		_dataCtrl      		CODE           	0736	0000	19
 		_initLCD       		CODE           	075C	0000	38
 
-C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c estimated size: 198
+Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c estimated size: 198
 
 shared
 		__stringtab    		STRING         	0003	0000	6

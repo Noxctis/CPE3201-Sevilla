@@ -7,7 +7,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RC2 `Vb ~T0 @X0 0 e@58 ]
 "2533
 [v _RC1 `Vb ~T0 @X0 0 e@57 ]
-"22 C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-1.c
+"22 Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-1.c
 [v _delay `(v ~T0 @X0 0 ef1`ui ]
 [p mainexit ]
 "1335 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic16f877a.h
@@ -1029,7 +1029,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, __eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern __nonreentrant void _delay(unsigned long);
-"10 C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-1.c
+"10 Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-1.c
 [p x FOSC=XT ]
 "11
 [p x WDTE=OFF ]

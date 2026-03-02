@@ -188,7 +188,7 @@ __stringbase:
 psect	strings
 	global    __end_of__stringtab
 __end_of__stringtab:
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	62
 _keypad:
 	retlw	031h
@@ -425,7 +425,7 @@ main@count:	; 1 bytes @ 0x9
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 65 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+;;		line 65 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -456,12 +456,12 @@ main@count:	; 1 bytes @ 0x9
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext,global,class=CODE,delta=2,split=1
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	65
 global __pmaintext
 __pmaintext:	;psect for function _main
 psect	maintext
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	65
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
@@ -682,7 +682,7 @@ GLOBAL	__end_of_main
 
 ;; *************** function _initLCD *****************
 ;; Defined at:
-;;		line 35 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+;;		line 35 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -715,7 +715,7 @@ psect	text1,local,class=CODE,delta=2,merge=1
 global __ptext1
 __ptext1:	;psect for function _initLCD
 psect	text1
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	35
 	global	__size_of_initLCD
 	__size_of_initLCD	equ	__end_of_initLCD-_initLCD
@@ -765,7 +765,7 @@ GLOBAL	__end_of_initLCD
 
 ;; *************** function _instCtrl *****************
 ;; Defined at:
-;;		line 26 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+;;		line 26 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;  cmd             1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -798,7 +798,7 @@ psect	text2,local,class=CODE,delta=2,merge=1
 global __ptext2
 __ptext2:	;psect for function _instCtrl
 psect	text2
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	26
 	global	__size_of_instCtrl
 	__size_of_instCtrl	equ	__end_of_instCtrl-_instCtrl
@@ -860,7 +860,7 @@ GLOBAL	__end_of_instCtrl
 
 ;; *************** function _dataCtrl *****************
 ;; Defined at:
-;;		line 45 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+;;		line 45 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;  data            1    wreg     unsigned char 
 ;; Auto vars:     Size  Location     Type
@@ -892,7 +892,7 @@ psect	text3,local,class=CODE,delta=2,merge=1
 global __ptext3
 __ptext3:	;psect for function _dataCtrl
 psect	text3
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	45
 	global	__size_of_dataCtrl
 	__size_of_dataCtrl	equ	__end_of_dataCtrl-_dataCtrl
@@ -954,7 +954,7 @@ GLOBAL	__end_of_dataCtrl
 
 ;; *************** function _delay *****************
 ;; Defined at:
-;;		line 54 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+;;		line 54 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 ;; Parameters:    Size  Location     Type
 ;;  ms              2    0[COMMON] unsigned int 
 ;; Auto vars:     Size  Location     Type
@@ -989,7 +989,7 @@ psect	text4,local,class=CODE,delta=2,merge=1
 global __ptext4
 __ptext4:	;psect for function _delay
 psect	text4
-	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
+	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA2\LE2-3.c"
 	line	54
 	global	__size_of_delay
 	__size_of_delay	equ	__end_of_delay-_delay
