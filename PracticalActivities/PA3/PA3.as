@@ -171,6 +171,8 @@ EECON2 equ 018Dh ;#
 _PORTC	set	0x7
 	global	_PORTD
 _PORTD	set	0x8
+	global	_TMR0
+_TMR0	set	0x1
 	global	_GIE
 _GIE	set	0x5F
 	global	_INTE
@@ -191,8 +193,6 @@ _TRISB	set	0x86
 _TRISC	set	0x87
 	global	_TRISD
 _TRISD	set	0x88
-	global	_INTEDG
-_INTEDG	set	0x40E
 psect	text0,local,class=CODE,delta=2,merge=1
 ; #config settings
 	file	"C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic16f877a.h"
@@ -258,21 +258,20 @@ global __pcstackCOMMON
 __pcstackCOMMON:
 ?_ISR:	; 0 bytes @ 0x0
 ??_ISR:	; 0 bytes @ 0x0
-?_main:	; 0 bytes @ 0x0
-	ds	5
-?_delay:	; 0 bytes @ 0x5
-	global	delay@count
-delay@count:	; 2 bytes @ 0x5
-	ds	2
+?_main:	; 2 bytes @ 0x0
+	ds	6
+??_delay:	; 0 bytes @ 0x6
 psect	cstackBANK0,class=BANK0,space=1,noexec
 global __pcstackBANK0
 __pcstackBANK0:
-??_delay:	; 0 bytes @ 0x0
-	ds	1
-	global	delay@of_count
-delay@of_count:	; 2 bytes @ 0x1
+?_delay:	; 0 bytes @ 0x0
+	global	delay@ms
+delay@ms:	; 2 bytes @ 0x0
 	ds	2
-??_main:	; 0 bytes @ 0x3
+	global	delay@of_counter
+delay@of_counter:	; 2 bytes @ 0x2
+	ds	2
+??_main:	; 0 bytes @ 0x4
 	ds	1
 ;!
 ;!Data Sizes:
@@ -285,8 +284,8 @@ delay@of_count:	; 2 bytes @ 0x1
 ;!
 ;!Auto Spaces:
 ;!    Space          Size  Autos    Used
-;!    COMMON           14      7       9
-;!    BANK0            80      4       4
+;!    COMMON           14      6       8
+;!    BANK0            80      5       5
 ;!    BANK1            80      0       0
 ;!    BANK3            96      0       0
 ;!    BANK2            96      0       0
@@ -300,7 +299,7 @@ delay@of_count:	; 2 bytes @ 0x1
 ;!
 ;!Critical Paths under _main in COMMON
 ;!
-;!    _main->_delay
+;!    None.
 ;!
 ;!Critical Paths under _ISR in COMMON
 ;!
@@ -349,19 +348,18 @@ delay@of_count:	; 2 bytes @ 0x1
 ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;! ---------------------------------------------------------------------------------
 ;! (0) _main                                                 1     1      0     133
-;!                                              3 BANK0      1     1      0
+;!                                              4 BANK0      1     1      0
 ;!                              _delay
 ;! ---------------------------------------------------------------------------------
-;! (1) _delay                                                5     3      2     133
-;!                                              5 COMMON     2     0      2
-;!                                              0 BANK0      3     3      0
+;! (1) _delay                                                4     2      2     133
+;!                                              0 BANK0      4     2      2
 ;! ---------------------------------------------------------------------------------
 ;! Estimated maximum stack depth 1
 ;! ---------------------------------------------------------------------------------
 ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
 ;! ---------------------------------------------------------------------------------
-;! (2) _ISR                                                  5     5      0       0
-;!                                              0 COMMON     5     5      0
+;! (2) _ISR                                                  6     6      0       0
+;!                                              0 COMMON     6     6      0
 ;! ---------------------------------------------------------------------------------
 ;! Estimated maximum stack depth 2
 ;! ---------------------------------------------------------------------------------
@@ -381,7 +379,7 @@ delay@of_count:	; 2 bytes @ 0x1
 ;!EEDATA             100      0       0       0        0.0%
 ;!NULL                 0      0       0       0        0.0%
 ;!CODE                 0      0       0       0        0.0%
-;!COMMON               E      7       9       1       64.3%
+;!COMMON               E      6       8       1       57.1%
 ;!BITSFR0              0      0       0       1        0.0%
 ;!SFR0                 0      0       0       1        0.0%
 ;!BITSFR1              0      0       0       2        0.0%
@@ -391,7 +389,7 @@ delay@of_count:	; 2 bytes @ 0x1
 ;!BITBANK0            50      0       0       4        0.0%
 ;!BITSFR3              0      0       0       4        0.0%
 ;!SFR3                 0      0       0       4        0.0%
-;!BANK0               50      4       4       5        5.0%
+;!BANK0               50      5       5       5        6.3%
 ;!BITSFR2              0      0       0       5        0.0%
 ;!SFR2                 0      0       0       5        0.0%
 ;!BITBANK1            50      0       0       6        0.0%
@@ -406,13 +404,13 @@ delay@of_count:	; 2 bytes @ 0x1
 
 ;; *************** function _main *****************
 ;; Defined at:
-;;		line 51 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+;;		line 82 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
 ;;		None
 ;; Return value:  Size  Location     Type
-;;		None               void
+;;                  2   59[COMMON] int 
 ;; Registers used:
 ;;		wreg, status,2, status,0, pclath, cstack
 ;; Tracked objects:
@@ -433,13 +431,13 @@ delay@of_count:	; 2 bytes @ 0x1
 ;; This function uses a non-reentrant model
 ;;
 psect	maintext,global,class=CODE,delta=2,split=1
-	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
-	line	51
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+	line	82
 global __pmaintext
 __pmaintext:	;psect for function _main
 psect	maintext
-	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
-	line	51
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+	line	82
 	global	__size_of_main
 	__size_of_main	equ	__end_of_main-_main
 	
@@ -447,154 +445,154 @@ _main:
 ;incstack = 0
 	opt	stack 6
 ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
-	line	52
+	line	83
 	
-l655:	
-;LE3-3.c: 52: TRISA = 0X00;
+l696:	
+;LE3-3.c: 83: TRISA = 0X00;
 	bsf	status, 5	;RP0=1, select bank1
 	bcf	status, 6	;RP1=0, select bank1
 	clrf	(133)^080h	;volatile
-	line	53
+	line	84
 	
-l657:	
-;LE3-3.c: 53: TRISB = 0xFF;
+l698:	
+;LE3-3.c: 84: TRISB = 0xFF;
 	movlw	(0FFh)
 	movwf	(134)^080h	;volatile
-	line	54
+	line	85
 	
-l659:	
-;LE3-3.c: 54: TRISC = 0x00;
+l700:	
+;LE3-3.c: 85: TRISC = 0x00;
 	clrf	(135)^080h	;volatile
-	line	55
-;LE3-3.c: 55: TRISD = 0XFF;
+	line	86
+;LE3-3.c: 86: TRISD = 0XFF;
 	movlw	(0FFh)
 	movwf	(136)^080h	;volatile
-	line	57
-;LE3-3.c: 57: OPTION_REG = 0xC4;
+	line	96
+;LE3-3.c: 96: OPTION_REG = 0xC4;
 	movlw	(0C4h)
 	movwf	(129)^080h	;volatile
-	line	59
+	line	99
 	
-l661:	
-;LE3-3.c: 59: INTEDG = 1;
-	bsf	(1038/8)^080h,(1038)&7	;volatile
-	line	60
-	
-l663:	
-;LE3-3.c: 60: INTF = 0;
+l702:	
+;LE3-3.c: 99: INTF = 0;
 	bcf	(89/8),(89)&7	;volatile
-	line	61
+	line	100
 	
-l665:	
-;LE3-3.c: 61: INTE = 1;
+l704:	
+;LE3-3.c: 100: INTE = 1;
 	bsf	(92/8),(92)&7	;volatile
-	line	63
+	line	102
 	
-l667:	
-;LE3-3.c: 63: TMR0IF = 0;
-	bcf	(90/8),(90)&7	;volatile
-	line	64
-	
-l669:	
-;LE3-3.c: 64: TMR0IE = 1;
-	bsf	(93/8),(93)&7	;volatile
-	line	66
-	
-l671:	
-;LE3-3.c: 66: GIE = 1;
-	bsf	(95/8),(95)&7	;volatile
-	line	67
-	
-l673:	
-;LE3-3.c: 67: PORTC = 0X00;
+l706:	
+;LE3-3.c: 102: TMR0 = 0;
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
+	clrf	(1)	;volatile
+	line	104
+	
+l708:	
+;LE3-3.c: 104: TMR0IF = 0;
+	bcf	(90/8),(90)&7	;volatile
+	line	105
+	
+l710:	
+;LE3-3.c: 105: TMR0IE = 1;
+	bsf	(93/8),(93)&7	;volatile
+	line	107
+	
+l712:	
+;LE3-3.c: 107: GIE = 1;
+	bsf	(95/8),(95)&7	;volatile
+	line	108
+	
+l714:	
+;LE3-3.c: 108: PORTC = 0X00;
 	clrf	(7)	;volatile
-	goto	l675
-	line	69
-;LE3-3.c: 69: while(1){
+	line	110
+;LE3-3.c: 110: while(1){
 	
-l67:	
-	line	70
-	
-l675:	
-;LE3-3.c: 70: if(counter == 0x09){
-	movf	(_counter),w
+l60:	
+	line	111
+;LE3-3.c: 111: if(counter == 0x09){
+	movf	(_counter),w	;volatile
 	xorlw	09h
 	skipz
-	goto	u211
-	goto	u210
-u211:
-	goto	l679
-u210:
-	line	71
+	goto	u111
+	goto	u110
+u111:
+	goto	l718
+u110:
+	line	112
 	
-l677:	
-;LE3-3.c: 71: counter = 0x00;
-	clrf	(_counter)
-	line	72
-;LE3-3.c: 72: }
-	goto	l681
-	line	73
+l716:	
+;LE3-3.c: 112: counter = 0x00;
+	clrf	(_counter)	;volatile
+	line	113
+;LE3-3.c: 113: }
+	goto	l720
+	line	114
 	
-l68:	
-	line	74
+l61:	
+	line	115
 	
-l679:	
-;LE3-3.c: 73: else{
-;LE3-3.c: 74: counter++;
+l718:	
+;LE3-3.c: 114: else{
+;LE3-3.c: 115: counter++;
 	movlw	(01h)
 	movwf	(??_main+0)+0
 	movf	(??_main+0)+0,w
-	addwf	(_counter),f
-	goto	l681
-	line	75
+	addwf	(_counter),f	;volatile
+	goto	l720
+	line	116
 	
-l69:	
-	line	76
+l62:	
+	line	117
 	
-l681:	
-;LE3-3.c: 75: }
-;LE3-3.c: 76: delay(79);
-	movlw	low(04Fh)
-	movwf	(delay@count)
-	movlw	high(04Fh)
-	movwf	((delay@count))+1
+l720:	
+;LE3-3.c: 116: }
+;LE3-3.c: 117: delay(98);
+	movlw	low(062h)
+	movwf	(delay@ms)
+	movlw	high(062h)
+	movwf	((delay@ms))+1
 	fcall	_delay
-	line	77
+	line	118
 	
-l683:	
-;LE3-3.c: 77: PORTC = counter;
-	movf	(_counter),w
+l722:	
+;LE3-3.c: 118: PORTC = counter;
+	movf	(_counter),w	;volatile
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movwf	(7)	;volatile
-	goto	l675
-	line	78
+	goto	l60
+	line	119
 	
-l70:	
-	line	69
-	goto	l675
+l63:	
+	line	110
+	goto	l60
 	
-l71:	
-	line	79
+l64:	
+	line	121
+;LE3-3.c: 119: }
+;LE3-3.c: 120: return 0;
+;	Return value of _main is never used
 	
-l72:	
+l65:	
 	global	start
 	ljmp	start
 	opt stack 0
 GLOBAL	__end_of_main
 	__end_of_main:
-	signat	_main,88
+	signat	_main,90
 	global	_delay
 
 ;; *************** function _delay *****************
 ;; Defined at:
-;;		line 41 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+;;		line 38 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
 ;; Parameters:    Size  Location     Type
-;;  count           2    5[COMMON] int 
+;;  ms              2    0[BANK0 ] unsigned int 
 ;; Auto vars:     Size  Location     Type
-;;  of_count        2    1[BANK0 ] int 
+;;  of_counter      2    2[BANK0 ] unsigned int 
 ;; Return value:  Size  Location     Type
 ;;		None               void
 ;; Registers used:
@@ -604,11 +602,11 @@ GLOBAL	__end_of_main
 ;;		On exit  : 0/0
 ;;		Unchanged: 0/0
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-;;      Params:         2       0       0       0       0
+;;      Params:         0       2       0       0       0
 ;;      Locals:         0       2       0       0       0
-;;      Temps:          0       1       0       0       0
-;;      Totals:         2       3       0       0       0
-;;Total ram usage:        5 bytes
+;;      Temps:          0       0       0       0       0
+;;      Totals:         0       4       0       0       0
+;;Total ram usage:        4 bytes
 ;; Hardware stack levels used:    1
 ;; Hardware stack levels required when called:    1
 ;; This function calls:
@@ -618,12 +616,12 @@ GLOBAL	__end_of_main
 ;; This function uses a non-reentrant model
 ;;
 psect	text1,local,class=CODE,delta=2,merge=1
-	line	41
+	line	38
 global __ptext1
 __ptext1:	;psect for function _delay
 psect	text1
-	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
-	line	41
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+	line	38
 	global	__size_of_delay
 	__size_of_delay	equ	__end_of_delay-_delay
 	
@@ -631,78 +629,69 @@ _delay:
 ;incstack = 0
 	opt	stack 6
 ; Regs used in _delay: [wreg+status,2]
+	line	39
+	
+l690:	
+;LE3-3.c: 39: unsigned int of_counter = 0;
+	bcf	status, 5	;RP0=0, select bank0
+	bcf	status, 6	;RP1=0, select bank0
+	clrf	(delay@of_counter)
+	clrf	(delay@of_counter+1)
+	line	40
+;LE3-3.c: 40: while(of_counter < ms) {
+	goto	l35
+	
+l36:	
+	line	41
+;LE3-3.c: 41: if(myTMR0IF) {
+	btfss	(_myTMR0IF/8),(_myTMR0IF)&7	;volatile
+	goto	u91
+	goto	u90
+u91:
+	goto	l35
+u90:
 	line	42
 	
-l649:	
-;LE3-3.c: 42: int of_count = 0;
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	clrf	(delay@of_count)
-	clrf	(delay@of_count+1)
+l692:	
+;LE3-3.c: 42: myTMR0IF = 0;
+	bcf	(_myTMR0IF/8),(_myTMR0IF)&7	;volatile
 	line	43
-;LE3-3.c: 43: while (of_count < count){
-	goto	l60
 	
-l61:	
+l694:	
+;LE3-3.c: 43: of_counter++;
+	movlw	low(01h)
+	addwf	(delay@of_counter),f
+	skipnc
+	incf	(delay@of_counter+1),f
+	movlw	high(01h)
+	addwf	(delay@of_counter+1),f
+	goto	l35
 	line	44
-;LE3-3.c: 44: if (myTMR0IF){
-	btfss	(_myTMR0IF/8),(_myTMR0IF)&7
-	goto	u191
-	goto	u190
-u191:
-	goto	l60
-u190:
+	
+l37:	
 	line	45
 	
-l651:	
-;LE3-3.c: 45: of_count++;
-	movlw	low(01h)
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	addwf	(delay@of_count),f
-	skipnc
-	incf	(delay@of_count+1),f
-	movlw	high(01h)
-	addwf	(delay@of_count+1),f
+l35:	
+	line	40
+	movf	(delay@ms+1),w
+	subwf	(delay@of_counter+1),w
+	skipz
+	goto	u105
+	movf	(delay@ms),w
+	subwf	(delay@of_counter),w
+u105:
+	skipc
+	goto	u101
+	goto	u100
+u101:
+	goto	l36
+u100:
+	goto	l39
+	
+l38:	
 	line	46
 	
-l653:	
-;LE3-3.c: 46: myTMR0IF = 0;
-	bcf	(_myTMR0IF/8),(_myTMR0IF)&7
-	goto	l60
-	line	47
-	
-l62:	
-	line	48
-	
-l60:	
-	line	43
-	bcf	status, 5	;RP0=0, select bank0
-	bcf	status, 6	;RP1=0, select bank0
-	movf	(delay@of_count+1),w
-	xorlw	80h
-	movwf	(??_delay+0)+0
-	movf	(delay@count+1),w
-	xorlw	80h
-	subwf	(??_delay+0)+0,w
-	skipz
-	goto	u205
-	movf	(delay@count),w
-	subwf	(delay@of_count),w
-u205:
-
-	skipc
-	goto	u201
-	goto	u200
-u201:
-	goto	l61
-u200:
-	goto	l64
-	
-l63:	
-	line	49
-	
-l64:	
+l39:	
 	return
 	opt stack 0
 GLOBAL	__end_of_delay
@@ -712,7 +701,7 @@ GLOBAL	__end_of_delay
 
 ;; *************** function _ISR *****************
 ;; Defined at:
-;;		line 16 in file "Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+;;		line 48 in file "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
 ;; Parameters:    Size  Location     Type
 ;;		None
 ;; Auto vars:     Size  Location     Type
@@ -720,7 +709,7 @@ GLOBAL	__end_of_delay
 ;; Return value:  Size  Location     Type
 ;;		None               void
 ;; Registers used:
-;;		wreg, status,2, status,0
+;;		wreg, fsr0l, fsr0h, status,2, status,0
 ;; Tracked objects:
 ;;		On entry : 0/0
 ;;		On exit  : 0/0
@@ -728,9 +717,9 @@ GLOBAL	__end_of_delay
 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
 ;;      Params:         0       0       0       0       0
 ;;      Locals:         0       0       0       0       0
-;;      Temps:          5       0       0       0       0
-;;      Totals:         5       0       0       0       0
-;;Total ram usage:        5 bytes
+;;      Temps:          6       0       0       0       0
+;;      Totals:         6       0       0       0       0
+;;Total ram usage:        6 bytes
 ;; Hardware stack levels used:    1
 ;; This function calls:
 ;;		Nothing
@@ -739,19 +728,19 @@ GLOBAL	__end_of_delay
 ;; This function uses a non-reentrant model
 ;;
 psect	text2,local,class=CODE,delta=2,merge=1
-	line	16
+	line	48
 global __ptext2
 __ptext2:	;psect for function _ISR
 psect	text2
-	file	"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
-	line	16
+	file	"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+	line	48
 	global	__size_of_ISR
 	__size_of_ISR	equ	__end_of_ISR-_ISR
 	
 _ISR:	
 ;incstack = 0
 	opt	stack 6
-; Regs used in _ISR: [wreg+status,2+status,0]
+; Regs used in _ISR: [wreg-fsr0h+status,2+status,0]
 psect	intentry,class=CODE,delta=2
 global __pintentry
 __pintentry:
@@ -761,326 +750,279 @@ interrupt_function:
 	saved_w	set	btemp+0
 	movwf	saved_w
 	swapf	status,w
-	movwf	(??_ISR+1)
-	movf	fsr0,w
 	movwf	(??_ISR+2)
-	movf	pclath,w
+	movf	fsr0,w
 	movwf	(??_ISR+3)
+	movf	pclath,w
+	movwf	(??_ISR+4)
 	bcf	status, 5	;RP0=0, select bank0
 	bcf	status, 6	;RP1=0, select bank0
 	movf	btemp+1,w
-	movwf	(??_ISR+4)
+	movwf	(??_ISR+5)
 	ljmp	_ISR
 psect	text2
-	line	17
+	line	49
 	
-i1l535:	
-;LE3-3.c: 17: GIE = 0;
+i1l528:	
+;LE3-3.c: 49: GIE = 0;
 	bcf	(95/8),(95)&7	;volatile
-	line	18
-;LE3-3.c: 18: if(INTF){
+	line	51
+;LE3-3.c: 51: if(INTF){
 	btfss	(89/8),(89)&7	;volatile
 	goto	u3_21
 	goto	u3_20
 u3_21:
-	goto	i1l35
+	goto	i1l558
 u3_20:
-	line	19
+	line	52
 	
-i1l537:	
-;LE3-3.c: 19: INTF = 0;
+i1l530:	
+;LE3-3.c: 52: INTF = 0;
 	bcf	(89/8),(89)&7	;volatile
-	line	23
-	
-i1l539:	
-;LE3-3.c: 23: if(PORTD == 0x00) { PORTC = 0x01; counter = 0x01; }
-	movf	(8),w	;volatile
-	skipz
-	goto	u4_21
-	goto	u4_20
-u4_21:
-	goto	i1l545
-u4_20:
-	
-i1l541:	
-	movlw	(01h)
-	movwf	(7)	;volatile
-	
-i1l543:	
-	clrf	(_counter)
-	incf	(_counter),f
-	goto	i1l55
-	line	24
-	
-i1l36:	
-	
-i1l545:	
-;LE3-3.c: 24: else if(PORTD == 0x01) { PORTC = 0x02; counter = 0x02; }
-	movf	(8),w	;volatile
-	xorlw	01h
-	skipz
-	goto	u5_21
-	goto	u5_20
-u5_21:
-	goto	i1l549
-u5_20:
-	
-i1l547:	
-	movlw	(02h)
-	movwf	(7)	;volatile
-	movlw	(02h)
-	movwf	(??_ISR+0)+0
-	movf	(??_ISR+0)+0,w
-	movwf	(_counter)
-	goto	i1l55
-	line	25
-	
-i1l38:	
-	
-i1l549:	
-;LE3-3.c: 25: else if(PORTD == 0x02) { PORTC = 0x03; counter = 0x03; }
-	movf	(8),w	;volatile
-	xorlw	02h
-	skipz
-	goto	u6_21
-	goto	u6_20
-u6_21:
-	goto	i1l553
-u6_20:
-	
-i1l551:	
-	movlw	(03h)
-	movwf	(7)	;volatile
-	movlw	(03h)
-	movwf	(??_ISR+0)+0
-	movf	(??_ISR+0)+0,w
-	movwf	(_counter)
-	goto	i1l55
-	line	26
-	
-i1l40:	
-	
-i1l553:	
-;LE3-3.c: 26: else if(PORTD == 0x04) { PORTC = 0x04; counter = 0x04; }
-	movf	(8),w	;volatile
-	xorlw	04h
-	skipz
-	goto	u7_21
-	goto	u7_20
-u7_21:
-	goto	i1l557
-u7_20:
-	
-i1l555:	
-	movlw	(04h)
-	movwf	(7)	;volatile
-	movlw	(04h)
-	movwf	(??_ISR+0)+0
-	movf	(??_ISR+0)+0,w
-	movwf	(_counter)
-	goto	i1l55
-	line	27
-	
-i1l42:	
-	
-i1l557:	
-;LE3-3.c: 27: else if(PORTD == 0x05) { PORTC = 0x05; counter = 0x05; }
-	movf	(8),w	;volatile
-	xorlw	05h
-	skipz
-	goto	u8_21
-	goto	u8_20
-u8_21:
-	goto	i1l561
-u8_20:
-	
-i1l559:	
-	movlw	(05h)
-	movwf	(7)	;volatile
-	movlw	(05h)
-	movwf	(??_ISR+0)+0
-	movf	(??_ISR+0)+0,w
-	movwf	(_counter)
-	goto	i1l55
-	line	28
+	line	53
+;LE3-3.c: 53: myINTF = 1;
+	bsf	(_myINTF/8),(_myINTF)&7	;volatile
+	line	56
+;LE3-3.c: 56: switch (PORTD & 0x0F) {
+	goto	i1l554
+	line	57
+;LE3-3.c: 57: case 0x00: counter = 0x01; break;
 	
 i1l44:	
 	
-i1l561:	
-;LE3-3.c: 28: else if(PORTD == 0x06) { PORTC = 0x06; counter = 0x06; }
-	movf	(8),w	;volatile
-	xorlw	06h
-	skipz
-	goto	u9_21
-	goto	u9_20
-u9_21:
-	goto	i1l565
-u9_20:
-	
-i1l563:	
-	movlw	(06h)
-	movwf	(7)	;volatile
-	movlw	(06h)
+i1l532:	
+	movlw	(01h)
 	movwf	(??_ISR+0)+0
 	movf	(??_ISR+0)+0,w
-	movwf	(_counter)
-	goto	i1l55
-	line	29
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	58
+;LE3-3.c: 58: case 0x01: counter = 0x02; break;
 	
 i1l46:	
 	
-i1l565:	
-;LE3-3.c: 29: else if(PORTD == 0x08) { PORTC = 0x07; counter = 0x07; }
-	movf	(8),w	;volatile
-	xorlw	08h
-	skipz
-	goto	u10_21
-	goto	u10_20
-u10_21:
-	goto	i1l569
-u10_20:
-	
-i1l567:	
-	movlw	(07h)
-	movwf	(7)	;volatile
-	movlw	(07h)
+i1l534:	
+	movlw	(02h)
 	movwf	(??_ISR+0)+0
 	movf	(??_ISR+0)+0,w
-	movwf	(_counter)
-	goto	i1l55
-	line	30
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	59
+;LE3-3.c: 59: case 0x02: counter = 0x03; break;
+	
+i1l47:	
+	
+i1l536:	
+	movlw	(03h)
+	movwf	(??_ISR+0)+0
+	movf	(??_ISR+0)+0,w
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	60
+;LE3-3.c: 60: case 0x04: counter = 0x04; break;
 	
 i1l48:	
 	
-i1l569:	
-;LE3-3.c: 30: else if(PORTD == 0x09) { PORTC = 0x08; counter = 0x08; }
-	movf	(8),w	;volatile
-	xorlw	09h
-	skipz
-	goto	u11_21
-	goto	u11_20
-u11_21:
-	goto	i1l573
-u11_20:
-	
-i1l571:	
-	movlw	(08h)
-	movwf	(7)	;volatile
-	movlw	(08h)
+i1l538:	
+	movlw	(04h)
 	movwf	(??_ISR+0)+0
 	movf	(??_ISR+0)+0,w
-	movwf	(_counter)
-	goto	i1l55
-	line	31
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	61
+;LE3-3.c: 61: case 0x05: counter = 0x05; break;
+	
+i1l49:	
+	
+i1l540:	
+	movlw	(05h)
+	movwf	(??_ISR+0)+0
+	movf	(??_ISR+0)+0,w
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	62
+;LE3-3.c: 62: case 0x06: counter = 0x06; break;
 	
 i1l50:	
 	
-i1l573:	
-;LE3-3.c: 31: else if(PORTD == 0x0A) { PORTC = 0x09; counter = 0x09; }
-	movf	(8),w	;volatile
-	xorlw	0Ah
-	skipz
-	goto	u12_21
-	goto	u12_20
-u12_21:
-	goto	i1l577
-u12_20:
-	
-i1l575:	
-	movlw	(09h)
-	movwf	(7)	;volatile
-	movlw	(09h)
+i1l542:	
+	movlw	(06h)
 	movwf	(??_ISR+0)+0
 	movf	(??_ISR+0)+0,w
-	movwf	(_counter)
-	goto	i1l55
-	line	32
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	63
+;LE3-3.c: 63: case 0x08: counter = 0x07; break;
+	
+i1l51:	
+	
+i1l544:	
+	movlw	(07h)
+	movwf	(??_ISR+0)+0
+	movf	(??_ISR+0)+0,w
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	64
+;LE3-3.c: 64: case 0x09: counter = 0x08; break;
 	
 i1l52:	
 	
-i1l577:	
-;LE3-3.c: 32: else if(PORTD == 0x0D) { PORTC = 0x00; counter = 0x00; }
-	movf	(8),w	;volatile
-	xorlw	0Dh
-	skipz
-	goto	u13_21
-	goto	u13_20
-u13_21:
-	goto	i1l55
-u13_20:
-	
-i1l579:	
-	clrf	(7)	;volatile
-	clrf	(_counter)
-	goto	i1l55
-	
-i1l54:	
-	goto	i1l55
-	line	34
+i1l546:	
+	movlw	(08h)
+	movwf	(??_ISR+0)+0
+	movf	(??_ISR+0)+0,w
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	65
+;LE3-3.c: 65: case 0x0A: counter = 0x09; break;
 	
 i1l53:	
-	goto	i1l55
 	
-i1l51:	
-	goto	i1l55
+i1l548:	
+	movlw	(09h)
+	movwf	(??_ISR+0)+0
+	movf	(??_ISR+0)+0,w
+	movwf	(_counter)	;volatile
+	goto	i1l556
+	line	66
+;LE3-3.c: 66: case 0x0D: counter = 0x00; break;
 	
-i1l49:	
-	goto	i1l55
+i1l54:	
 	
-i1l47:	
-	goto	i1l55
-	
-i1l45:	
-	goto	i1l55
-	
-i1l43:	
-	goto	i1l55
-	
-i1l41:	
-	goto	i1l55
-	
-i1l39:	
-	goto	i1l55
-	
-i1l37:	
-;LE3-3.c: 34: } else if(TMR0IF){
-	goto	i1l55
-	
-i1l35:	
-	btfss	(90/8),(90)&7	;volatile
-	goto	u14_21
-	goto	u14_20
-u14_21:
-	goto	i1l55
-u14_20:
-	line	35
-	
-i1l581:	
-;LE3-3.c: 35: TMR0IF = 0;
-	bcf	(90/8),(90)&7	;volatile
-	line	36
-;LE3-3.c: 36: myTMR0IF = 1;
-	bsf	(_myTMR0IF/8),(_myTMR0IF)&7
-	goto	i1l55
-	line	37
-	
-i1l56:	
-	line	38
+i1l550:	
+	clrf	(_counter)	;volatile
+	goto	i1l556
+	line	67
+;LE3-3.c: 67: default: break;
 	
 i1l55:	
-;LE3-3.c: 37: }
-;LE3-3.c: 38: GIE = 1;
+	goto	i1l556
+	line	68
+	
+i1l552:	
+;LE3-3.c: 68: }
+	goto	i1l556
+	line	56
+	
+i1l43:	
+	
+i1l554:	
+	movf	(8),w	;volatile
+	andlw	0Fh
+	movwf	(??_ISR+0)+0
+	clrf	(??_ISR+0)+0+1
+	; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-switches
+; Switch size 1, requested type "space"
+; Number of cases is 1, Range of values is 0 to 0
+; switch strategies available:
+; Name         Instructions Cycles
+; simple_byte            4     3 (average)
+; direct_byte           11     8 (fixed)
+; jumptable            260     6 (fixed)
+;	Chosen strategy is simple_byte
+
+	movf 1+(??_ISR+0)+0,w
+	opt asmopt_off
+	xorlw	0^0	; case 0
+	skipnz
+	goto	i1l754
+	goto	i1l556
+	opt asmopt_on
+	
+i1l754:	
+; Switch size 1, requested type "space"
+; Number of cases is 10, Range of values is 0 to 13
+; switch strategies available:
+; Name         Instructions Cycles
+; simple_byte           31    16 (average)
+; direct_byte           50     8 (fixed)
+; jumptable            260     6 (fixed)
+;	Chosen strategy is simple_byte
+
+	movf 0+(??_ISR+0)+0,w
+	opt asmopt_off
+	xorlw	0^0	; case 0
+	skipnz
+	goto	i1l532
+	xorlw	1^0	; case 1
+	skipnz
+	goto	i1l534
+	xorlw	2^1	; case 2
+	skipnz
+	goto	i1l536
+	xorlw	4^2	; case 4
+	skipnz
+	goto	i1l538
+	xorlw	5^4	; case 5
+	skipnz
+	goto	i1l540
+	xorlw	6^5	; case 6
+	skipnz
+	goto	i1l542
+	xorlw	8^6	; case 8
+	skipnz
+	goto	i1l544
+	xorlw	9^8	; case 9
+	skipnz
+	goto	i1l546
+	xorlw	10^9	; case 10
+	skipnz
+	goto	i1l548
+	xorlw	13^10	; case 13
+	skipnz
+	goto	i1l550
+	goto	i1l556
+	opt asmopt_on
+
+	line	68
+	
+i1l45:	
+	line	70
+	
+i1l556:	
+;LE3-3.c: 70: PORTC = counter;
+	movf	(_counter),w	;volatile
+	movwf	(7)	;volatile
+	goto	i1l558
+	line	72
+	
+i1l42:	
+	line	75
+	
+i1l558:	
+;LE3-3.c: 72: }
+;LE3-3.c: 75: if (TMR0IF) {
+	btfss	(90/8),(90)&7	;volatile
+	goto	u4_21
+	goto	u4_20
+u4_21:
+	goto	i1l56
+u4_20:
+	line	76
+	
+i1l560:	
+;LE3-3.c: 76: TMR0IF = 0;
+	bcf	(90/8),(90)&7	;volatile
+	line	77
+;LE3-3.c: 77: myTMR0IF = 1;
+	bsf	(_myTMR0IF/8),(_myTMR0IF)&7	;volatile
+	line	78
+	
+i1l56:	
+	line	79
+;LE3-3.c: 78: }
+;LE3-3.c: 79: GIE = 1;
 	bsf	(95/8),(95)&7	;volatile
-	line	39
+	line	80
 	
 i1l57:	
-	movf	(??_ISR+4),w
+	movf	(??_ISR+5),w
 	movwf	btemp+1
-	movf	(??_ISR+3),w
+	movf	(??_ISR+4),w
 	movwf	pclath
-	movf	(??_ISR+2),w
+	movf	(??_ISR+3),w
 	movwf	fsr0
-	swapf	(??_ISR+1)^0FFFFFF80h,w
+	swapf	(??_ISR+2)^0FFFFFF80h,w
 	movwf	status
 	swapf	saved_w,f
 	swapf	saved_w,w

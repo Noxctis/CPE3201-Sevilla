@@ -1,5 +1,5 @@
 
-# 1 "Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+# 1 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
 
 # 21 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1426,7 +1426,7 @@ extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsi
 extern __nonreentrant void _delay(unsigned long);
 
 
-# 3 "Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
+# 15 "C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c"
 #pragma config FOSC = XT
 #pragma config WDTE = OFF
 #pragma config PWRTE = ON
@@ -1436,56 +1436,72 @@ extern __nonreentrant void _delay(unsigned long);
 #pragma config WRT = OFF
 #pragma config CP = OFF
 
-bit myINTF = 0;
-bit myTMR0IF = 0;
-unsigned char counter = 0x00;
+volatile __bit myINTF = 0;
+volatile __bit myTMR0IF = 0;
+volatile unsigned char counter = 0x00;
 
-void interrupt ISR (){
+void delay(unsigned int ms);
+void interrupt ISR(void);
+
+# 38
+void delay(unsigned int ms) {
+unsigned int of_counter = 0;
+while(of_counter < ms) {
+if(myTMR0IF) {
+myTMR0IF = 0;
+of_counter++;
+}
+}
+}
+
+void interrupt ISR(void){
 GIE = 0;
+
 if(INTF){
 INTF = 0;
+myINTF = 1;
 
 
+switch (PORTD & 0x0F) {
+case 0x00: counter = 0x01; break;
+case 0x01: counter = 0x02; break;
+case 0x02: counter = 0x03; break;
+case 0x04: counter = 0x04; break;
+case 0x05: counter = 0x05; break;
+case 0x06: counter = 0x06; break;
+case 0x08: counter = 0x07; break;
+case 0x09: counter = 0x08; break;
+case 0x0A: counter = 0x09; break;
+case 0x0D: counter = 0x00; break;
+default: break;
+}
 
-if(PORTD == 0x00) { PORTC = 0x01; counter = 0x01; }
-else if(PORTD == 0x01) { PORTC = 0x02; counter = 0x02; }
-else if(PORTD == 0x02) { PORTC = 0x03; counter = 0x03; }
-else if(PORTD == 0x04) { PORTC = 0x04; counter = 0x04; }
-else if(PORTD == 0x05) { PORTC = 0x05; counter = 0x05; }
-else if(PORTD == 0x06) { PORTC = 0x06; counter = 0x06; }
-else if(PORTD == 0x08) { PORTC = 0x07; counter = 0x07; }
-else if(PORTD == 0x09) { PORTC = 0x08; counter = 0x08; }
-else if(PORTD == 0x0A) { PORTC = 0x09; counter = 0x09; }
-else if(PORTD == 0x0D) { PORTC = 0x00; counter = 0x00; }
+PORTC = counter;
 
-} else if(TMR0IF){
+}
+
+
+if (TMR0IF) {
 TMR0IF = 0;
 myTMR0IF = 1;
 }
 GIE = 1;
 }
 
-void delay(int count){
-int of_count = 0;
-while (of_count < count){
-if (myTMR0IF){
-of_count++;
-myTMR0IF = 0;
-}
-}
-}
-
-void main(){
+int main(){
 TRISA = 0X00;
 TRISB = 0xFF;
 TRISC = 0x00;
 TRISD = 0XFF;
 
+# 96
 OPTION_REG = 0xC4;
 
-INTEDG = 1;
+
 INTF = 0;
 INTE = 1;
+
+TMR0 = 0;
 
 TMR0IF = 0;
 TMR0IE = 1;
@@ -1500,7 +1516,8 @@ counter = 0x00;
 else{
 counter++;
 }
-delay(79);
+delay(98);
 PORTC = counter;
 }
+return 0;
 }

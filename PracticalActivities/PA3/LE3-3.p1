@@ -20,10 +20,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRISD `Vuc ~T0 @X0 0 e@136 ]
 "1217
 [v _OPTION_REG `Vuc ~T0 @X0 0 e@129 ]
-"2463
-[v _INTEDG `Vb ~T0 @X0 0 e@1038 ]
 "2461
 [v _INTE `Vb ~T0 @X0 0 e@92 ]
+"53
+[v _TMR0 `Vuc ~T0 @X0 0 e@1 ]
 "2647
 [v _TMR0IE `Vb ~T0 @X0 0 e@93 ]
 [; ;htc.h: 21: extern const char __xc8_OPTIM_SPEED;
@@ -1039,303 +1039,294 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, __eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern __nonreentrant void _delay(unsigned long);
-"3 Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c
+"15 C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c
 [p x FOSC=XT ]
-"4
+"16
 [p x WDTE=OFF ]
-"5
+"17
 [p x PWRTE=ON ]
-"6
+"18
 [p x BOREN=ON ]
-"7
+"19
 [p x LVP=OFF ]
-"8
+"20
 [p x CPD=OFF ]
-"9
+"21
 [p x WRT=OFF ]
-"10
+"22
 [p x CP=OFF ]
-"12
-[v _myINTF `b ~T0 @X0 1 e ]
+"24
+[v _myINTF `Vb ~T0 @X0 1 e ]
 [i _myINTF
 -> 0 `i
 ]
-[; ;LE3-3.c: 12: bit myINTF = 0;
-"13
-[v _myTMR0IF `b ~T0 @X0 1 e ]
+[; ;LE3-3.c: 24: volatile __bit myINTF = 0;
+"25
+[v _myTMR0IF `Vb ~T0 @X0 1 e ]
 [i _myTMR0IF
 -> 0 `i
 ]
-[; ;LE3-3.c: 13: bit myTMR0IF = 0;
-"14
-[v _counter `uc ~T0 @X0 1 e ]
+[; ;LE3-3.c: 25: volatile __bit myTMR0IF = 0;
+"26
+[v _counter `Vuc ~T0 @X0 1 e ]
 [i _counter
 -> -> 0 `i `uc
 ]
-[; ;LE3-3.c: 14: unsigned char counter = 0x00;
-[v F1094 `(v ~T0 @X0 1 tf ]
-"16
-[v _ISR `IF1094 ~T0 @X0 1 e ]
-{
-[; ;LE3-3.c: 16: void interrupt ISR (){
-[e :U _ISR ]
-[f ]
-[; ;LE3-3.c: 17: GIE = 0;
-"17
-[e = _GIE -> -> 0 `i `b ]
-[; ;LE3-3.c: 18: if(INTF){
-"18
-[e $ ! _INTF 97  ]
-{
-[; ;LE3-3.c: 19: INTF = 0;
-"19
-[e = _INTF -> -> 0 `i `b ]
-[; ;LE3-3.c: 23: if(PORTD == 0x00) { PORTC = 0x01; counter = 0x01; }
-"23
-[e $ ! == -> _PORTD `i -> 0 `i 98  ]
-{
-[e = _PORTC -> -> 1 `i `uc ]
-[e = _counter -> -> 1 `i `uc ]
-}
-[e $U 99  ]
-"24
-[e :U 98 ]
-[; ;LE3-3.c: 24: else if(PORTD == 0x01) { PORTC = 0x02; counter = 0x02; }
-[e $ ! == -> _PORTD `i -> 1 `i 100  ]
-{
-[e = _PORTC -> -> 2 `i `uc ]
-[e = _counter -> -> 2 `i `uc ]
-}
-[e $U 101  ]
-"25
-[e :U 100 ]
-[; ;LE3-3.c: 25: else if(PORTD == 0x02) { PORTC = 0x03; counter = 0x03; }
-[e $ ! == -> _PORTD `i -> 2 `i 102  ]
-{
-[e = _PORTC -> -> 3 `i `uc ]
-[e = _counter -> -> 3 `i `uc ]
-}
-[e $U 103  ]
-"26
-[e :U 102 ]
-[; ;LE3-3.c: 26: else if(PORTD == 0x04) { PORTC = 0x04; counter = 0x04; }
-[e $ ! == -> _PORTD `i -> 4 `i 104  ]
-{
-[e = _PORTC -> -> 4 `i `uc ]
-[e = _counter -> -> 4 `i `uc ]
-}
-[e $U 105  ]
-"27
-[e :U 104 ]
-[; ;LE3-3.c: 27: else if(PORTD == 0x05) { PORTC = 0x05; counter = 0x05; }
-[e $ ! == -> _PORTD `i -> 5 `i 106  ]
-{
-[e = _PORTC -> -> 5 `i `uc ]
-[e = _counter -> -> 5 `i `uc ]
-}
-[e $U 107  ]
-"28
-[e :U 106 ]
-[; ;LE3-3.c: 28: else if(PORTD == 0x06) { PORTC = 0x06; counter = 0x06; }
-[e $ ! == -> _PORTD `i -> 6 `i 108  ]
-{
-[e = _PORTC -> -> 6 `i `uc ]
-[e = _counter -> -> 6 `i `uc ]
-}
-[e $U 109  ]
-"29
-[e :U 108 ]
-[; ;LE3-3.c: 29: else if(PORTD == 0x08) { PORTC = 0x07; counter = 0x07; }
-[e $ ! == -> _PORTD `i -> 8 `i 110  ]
-{
-[e = _PORTC -> -> 7 `i `uc ]
-[e = _counter -> -> 7 `i `uc ]
-}
-[e $U 111  ]
-"30
-[e :U 110 ]
-[; ;LE3-3.c: 30: else if(PORTD == 0x09) { PORTC = 0x08; counter = 0x08; }
-[e $ ! == -> _PORTD `i -> 9 `i 112  ]
-{
-[e = _PORTC -> -> 8 `i `uc ]
-[e = _counter -> -> 8 `i `uc ]
-}
-[e $U 113  ]
-"31
-[e :U 112 ]
-[; ;LE3-3.c: 31: else if(PORTD == 0x0A) { PORTC = 0x09; counter = 0x09; }
-[e $ ! == -> _PORTD `i -> 10 `i 114  ]
-{
-[e = _PORTC -> -> 9 `i `uc ]
-[e = _counter -> -> 9 `i `uc ]
-}
-[e $U 115  ]
-"32
-[e :U 114 ]
-[; ;LE3-3.c: 32: else if(PORTD == 0x0D) { PORTC = 0x00; counter = 0x00; }
-[e $ ! == -> _PORTD `i -> 13 `i 116  ]
-{
-[e = _PORTC -> -> 0 `i `uc ]
-[e = _counter -> -> 0 `i `uc ]
-}
-[e :U 116 ]
-"34
-[e :U 115 ]
-[e :U 113 ]
-[e :U 111 ]
-[e :U 109 ]
-[e :U 107 ]
-[e :U 105 ]
-[e :U 103 ]
-[e :U 101 ]
-[e :U 99 ]
-}
-[; ;LE3-3.c: 34: } else if(TMR0IF){
-[e $U 117  ]
-[e :U 97 ]
-[e $ ! _TMR0IF 118  ]
-{
-[; ;LE3-3.c: 35: TMR0IF = 0;
-"35
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;LE3-3.c: 36: myTMR0IF = 1;
-"36
-[e = _myTMR0IF -> -> 1 `i `b ]
-"37
-}
-[e :U 118 ]
+[; ;LE3-3.c: 26: volatile unsigned char counter = 0x00;
+[; ;LE3-3.c: 28: void delay(unsigned int ms);
+[; ;LE3-3.c: 29: void interrupt ISR(void);
 "38
-[e :U 117 ]
-[; ;LE3-3.c: 37: }
-[; ;LE3-3.c: 38: GIE = 1;
-[e = _GIE -> -> 1 `i `b ]
-[; ;LE3-3.c: 39: }
+[v _delay `(v ~T0 @X0 1 ef1`ui ]
+{
+[; ;LE3-3.c: 38: void delay(unsigned int ms) {
+[e :U _delay ]
+[v _ms `ui ~T0 @X0 1 r1 ]
+[f ]
 "39
+[v _of_counter `ui ~T0 @X0 1 a ]
+[; ;LE3-3.c: 39: unsigned int of_counter = 0;
+[e = _of_counter -> -> 0 `i `ui ]
+[; ;LE3-3.c: 40: while(of_counter < ms) {
+"40
+[e $U 97  ]
+[e :U 98 ]
+{
+[; ;LE3-3.c: 41: if(myTMR0IF) {
+"41
+[e $ ! _myTMR0IF 100  ]
+{
+[; ;LE3-3.c: 42: myTMR0IF = 0;
+"42
+[e = _myTMR0IF -> -> 0 `i `b ]
+[; ;LE3-3.c: 43: of_counter++;
+"43
+[e ++ _of_counter -> -> 1 `i `ui ]
+"44
+}
+[e :U 100 ]
+"45
+}
+[e :U 97 ]
+"40
+[e $ < _of_counter _ms 98  ]
+[e :U 99 ]
+[; ;LE3-3.c: 44: }
+[; ;LE3-3.c: 45: }
+[; ;LE3-3.c: 46: }
+"46
 [e :UE 96 ]
 }
-"41
-[v _delay `(v ~T0 @X0 1 ef1`i ]
-{
-[; ;LE3-3.c: 41: void delay(int count){
-[e :U _delay ]
-[v _count `i ~T0 @X0 1 r1 ]
-[f ]
-"42
-[v _of_count `i ~T0 @X0 1 a ]
-[; ;LE3-3.c: 42: int of_count = 0;
-[e = _of_count -> 0 `i ]
-[; ;LE3-3.c: 43: while (of_count < count){
-"43
-[e $U 120  ]
-[e :U 121 ]
-{
-[; ;LE3-3.c: 44: if (myTMR0IF){
-"44
-[e $ ! _myTMR0IF 123  ]
-{
-[; ;LE3-3.c: 45: of_count++;
-"45
-[e ++ _of_count -> 1 `i ]
-[; ;LE3-3.c: 46: myTMR0IF = 0;
-"46
-[e = _myTMR0IF -> -> 0 `i `b ]
-"47
-}
-[e :U 123 ]
+[v F1097 `(v ~T0 @X0 1 tf ]
 "48
-}
-[e :U 120 ]
-"43
-[e $ < _of_count _count 121  ]
-[e :U 122 ]
-[; ;LE3-3.c: 47: }
-[; ;LE3-3.c: 48: }
-[; ;LE3-3.c: 49: }
-"49
-[e :UE 119 ]
-}
-"51
-[v _main `(v ~T0 @X0 1 ef ]
+[v _ISR `IF1097 ~T0 @X0 1 e ]
 {
-[; ;LE3-3.c: 51: void main(){
-[e :U _main ]
+[; ;LE3-3.c: 48: void interrupt ISR(void){
+[e :U _ISR ]
 [f ]
-[; ;LE3-3.c: 52: TRISA = 0X00;
+[; ;LE3-3.c: 49: GIE = 0;
+"49
+[e = _GIE -> -> 0 `i `b ]
+[; ;LE3-3.c: 51: if(INTF){
+"51
+[e $ ! _INTF 102  ]
+{
+[; ;LE3-3.c: 52: INTF = 0;
 "52
-[e = _TRISA -> -> 0 `i `uc ]
-[; ;LE3-3.c: 53: TRISB = 0xFF;
-"53
-[e = _TRISB -> -> 255 `i `uc ]
-[; ;LE3-3.c: 54: TRISC = 0x00;
-"54
-[e = _TRISC -> -> 0 `i `uc ]
-[; ;LE3-3.c: 55: TRISD = 0XFF;
-"55
-[e = _TRISD -> -> 255 `i `uc ]
-[; ;LE3-3.c: 57: OPTION_REG = 0xC4;
-"57
-[e = _OPTION_REG -> -> 196 `i `uc ]
-[; ;LE3-3.c: 59: INTEDG = 1;
-"59
-[e = _INTEDG -> -> 1 `i `b ]
-[; ;LE3-3.c: 60: INTF = 0;
-"60
 [e = _INTF -> -> 0 `i `b ]
-[; ;LE3-3.c: 61: INTE = 1;
+[; ;LE3-3.c: 53: myINTF = 1;
+"53
+[e = _myINTF -> -> 1 `i `b ]
+[; ;LE3-3.c: 56: switch (PORTD & 0x0F) {
+"56
+[e $U 104  ]
+{
+[; ;LE3-3.c: 57: case 0x00: counter = 0x01; break;
+"57
+[e :U 105 ]
+[e = _counter -> -> 1 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 58: case 0x01: counter = 0x02; break;
+"58
+[e :U 106 ]
+[e = _counter -> -> 2 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 59: case 0x02: counter = 0x03; break;
+"59
+[e :U 107 ]
+[e = _counter -> -> 3 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 60: case 0x04: counter = 0x04; break;
+"60
+[e :U 108 ]
+[e = _counter -> -> 4 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 61: case 0x05: counter = 0x05; break;
 "61
-[e = _INTE -> -> 1 `i `b ]
-[; ;LE3-3.c: 63: TMR0IF = 0;
+[e :U 109 ]
+[e = _counter -> -> 5 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 62: case 0x06: counter = 0x06; break;
+"62
+[e :U 110 ]
+[e = _counter -> -> 6 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 63: case 0x08: counter = 0x07; break;
 "63
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;LE3-3.c: 64: TMR0IE = 1;
+[e :U 111 ]
+[e = _counter -> -> 7 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 64: case 0x09: counter = 0x08; break;
 "64
-[e = _TMR0IE -> -> 1 `i `b ]
-[; ;LE3-3.c: 66: GIE = 1;
+[e :U 112 ]
+[e = _counter -> -> 8 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 65: case 0x0A: counter = 0x09; break;
+"65
+[e :U 113 ]
+[e = _counter -> -> 9 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 66: case 0x0D: counter = 0x00; break;
 "66
-[e = _GIE -> -> 1 `i `b ]
-[; ;LE3-3.c: 67: PORTC = 0X00;
-"67
-[e = _PORTC -> -> 0 `i `uc ]
-[; ;LE3-3.c: 69: while(1){
-"69
-[e :U 126 ]
-{
-[; ;LE3-3.c: 70: if(counter == 0x09){
-"70
-[e $ ! == -> _counter `i -> 9 `i 128  ]
-{
-[; ;LE3-3.c: 71: counter = 0x00;
-"71
+[e :U 114 ]
 [e = _counter -> -> 0 `i `uc ]
+[e $U 103  ]
+[; ;LE3-3.c: 67: default: break;
+"67
+[e :U 115 ]
+[e $U 103  ]
+"68
+}
+[; ;LE3-3.c: 68: }
+[e $U 103  ]
+"56
+[e :U 104 ]
+[e [\ & -> _PORTD `i -> 15 `i , $ -> 0 `i 105
+ , $ -> 1 `i 106
+ , $ -> 2 `i 107
+ , $ -> 4 `i 108
+ , $ -> 5 `i 109
+ , $ -> 6 `i 110
+ , $ -> 8 `i 111
+ , $ -> 9 `i 112
+ , $ -> 10 `i 113
+ , $ -> 13 `i 114
+ 115 ]
+"68
+[e :U 103 ]
+[; ;LE3-3.c: 70: PORTC = counter;
+"70
+[e = _PORTC _counter ]
 "72
 }
+[e :U 102 ]
 [; ;LE3-3.c: 72: }
-[e $U 129  ]
-"73
-[e :U 128 ]
-[; ;LE3-3.c: 73: else{
-{
-[; ;LE3-3.c: 74: counter++;
-"74
-[e ++ _counter -> -> 1 `i `uc ]
+[; ;LE3-3.c: 75: if (TMR0IF) {
 "75
-}
-[e :U 129 ]
-[; ;LE3-3.c: 75: }
-[; ;LE3-3.c: 76: delay(79);
+[e $ ! _TMR0IF 116  ]
+{
+[; ;LE3-3.c: 76: TMR0IF = 0;
 "76
-[e ( _delay (1 -> 79 `i ]
-[; ;LE3-3.c: 77: PORTC = counter;
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;LE3-3.c: 77: myTMR0IF = 1;
 "77
-[e = _PORTC _counter ]
+[e = _myTMR0IF -> -> 1 `i `b ]
 "78
 }
-[e :U 125 ]
-"69
-[e $U 126  ]
-[e :U 127 ]
+[e :U 116 ]
 [; ;LE3-3.c: 78: }
-[; ;LE3-3.c: 79: }
+[; ;LE3-3.c: 79: GIE = 1;
 "79
-[e :UE 124 ]
+[e = _GIE -> -> 1 `i `b ]
+[; ;LE3-3.c: 80: }
+"80
+[e :UE 101 ]
+}
+"82
+[v _main `(i ~T0 @X0 1 ef ]
+{
+[; ;LE3-3.c: 82: int main(){
+[e :U _main ]
+[f ]
+[; ;LE3-3.c: 83: TRISA = 0X00;
+"83
+[e = _TRISA -> -> 0 `i `uc ]
+[; ;LE3-3.c: 84: TRISB = 0xFF;
+"84
+[e = _TRISB -> -> 255 `i `uc ]
+[; ;LE3-3.c: 85: TRISC = 0x00;
+"85
+[e = _TRISC -> -> 0 `i `uc ]
+[; ;LE3-3.c: 86: TRISD = 0XFF;
+"86
+[e = _TRISD -> -> 255 `i `uc ]
+[; ;LE3-3.c: 96: OPTION_REG = 0xC4;
+"96
+[e = _OPTION_REG -> -> 196 `i `uc ]
+[; ;LE3-3.c: 99: INTF = 0;
+"99
+[e = _INTF -> -> 0 `i `b ]
+[; ;LE3-3.c: 100: INTE = 1;
+"100
+[e = _INTE -> -> 1 `i `b ]
+[; ;LE3-3.c: 102: TMR0 = 0;
+"102
+[e = _TMR0 -> -> 0 `i `uc ]
+[; ;LE3-3.c: 104: TMR0IF = 0;
+"104
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;LE3-3.c: 105: TMR0IE = 1;
+"105
+[e = _TMR0IE -> -> 1 `i `b ]
+[; ;LE3-3.c: 107: GIE = 1;
+"107
+[e = _GIE -> -> 1 `i `b ]
+[; ;LE3-3.c: 108: PORTC = 0X00;
+"108
+[e = _PORTC -> -> 0 `i `uc ]
+[; ;LE3-3.c: 110: while(1){
+"110
+[e :U 119 ]
+{
+[; ;LE3-3.c: 111: if(counter == 0x09){
+"111
+[e $ ! == -> _counter `i -> 9 `i 121  ]
+{
+[; ;LE3-3.c: 112: counter = 0x00;
+"112
+[e = _counter -> -> 0 `i `uc ]
+"113
+}
+[; ;LE3-3.c: 113: }
+[e $U 122  ]
+"114
+[e :U 121 ]
+[; ;LE3-3.c: 114: else{
+{
+[; ;LE3-3.c: 115: counter++;
+"115
+[e ++ _counter -> -> 1 `i `uc ]
+"116
+}
+[e :U 122 ]
+[; ;LE3-3.c: 116: }
+[; ;LE3-3.c: 117: delay(98);
+"117
+[e ( _delay (1 -> -> 98 `i `ui ]
+[; ;LE3-3.c: 118: PORTC = counter;
+"118
+[e = _PORTC _counter ]
+"119
+}
+[e :U 118 ]
+"110
+[e $U 119  ]
+[e :U 120 ]
+[; ;LE3-3.c: 119: }
+[; ;LE3-3.c: 120: return 0;
+"120
+[e ) -> 0 `i ]
+[e $UE 117  ]
+[; ;LE3-3.c: 121: }
+"121
+[e :UE 117 ]
 }

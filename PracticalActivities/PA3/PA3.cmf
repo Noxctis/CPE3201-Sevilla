@@ -18,33 +18,33 @@ config CONFIG 0 2007 2007 1 2
 $PA3.obj
 cinit CODE 0 15 15 6 2
 intentry CODE 0 4 4 E 2
-text2 CODE 0 1B 1B 66 2
-text1 CODE 0 AC AC 1E 2
-maintext CODE 0 81 81 2B 2
-cstackBANK0 BANK0 1 20 20 4 1
-cstackCOMMON COMMON 1 70 70 7 1
-bssCOMMON COMMON 1 78 78 1 1
-bitbssCOMMON COMMON 1 3B8 77 2 1
+text2 CODE 0 1B 1B 58 2
+text1 CODE 0 9E 9E 16 2
+maintext CODE 0 73 73 2B 2
+cstackBANK0 BANK0 1 20 20 5 1
+cstackCOMMON COMMON 1 70 70 6 1
+bssCOMMON COMMON 1 77 77 1 1
+bitbssCOMMON COMMON 1 3B0 76 2 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
 #    <class name> <range> <delta>
 # Addresses given in the range are in hexadecimal and units of delta.
 %UNUSED
-BANK0 0024-006F 1
+BANK0 0025-006F 1
 BANK1 00A0-00EF 1
 BANK2 0110-016F 1
 BANK3 0190-01EF 1
 CODE 0003-0003 2
-CODE 00CA-1FFF 2
-COMMON 0079-007D 1
+CODE 00B4-1FFF 2
+COMMON 0078-007D 1
 CONST 0003-0003 2
-CONST 00CA-1FFF 2
+CONST 00B4-1FFF 2
 EEDATA 2100-21FF 2
 ENTRY 0003-0003 2
-ENTRY 00CA-1FFF 2
+ENTRY 00B4-1FFF 2
 IDLOC 2000-2003 2
-RAM 0024-006F 1
+RAM 0025-006F 1
 RAM 00A0-00EF 1
 RAM 0110-016F 1
 RAM 0190-01EF 1
@@ -54,9 +54,9 @@ SFR2 0100-010F 1
 SFR3 0180-018F 1
 STACK 0110-016F 1
 STRCODE 0003-0003 2
-STRCODE 00CA-1FFF 2
+STRCODE 00B4-1FFF 2
 STRING 0003-0003 2
-STRING 00CA-1FFF 2
+STRING 00B4-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -72,72 +72,79 @@ STRING 00CA-1FFF 2
 %LINETAB
 $PA3.obj
 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic16f877a.h":2761 0 text0 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":16 4 intentry CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":222 15 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":225 15 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":244 15 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":247 16 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":253 17 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":254 17 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":255 18 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":16 1B text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":17 1B text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":18 1C text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":19 1E text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":23 1F text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":24 27 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":25 2F text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":26 37 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":27 3F text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":28 47 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":29 4F text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":30 57 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":31 5F text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":32 6A text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":34 70 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":35 73 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":36 74 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":38 75 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":39 76 text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":51 81 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":52 81 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":53 84 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":54 86 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":55 87 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":57 89 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":59 8B maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":60 8C maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":61 8D maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":63 8E maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":64 8F maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":66 90 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":67 91 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":70 94 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":71 98 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":72 99 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":74 9A maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":76 9E maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":77 A7 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":69 AB maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":41 AC text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":42 AC text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":43 B0 text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":48 B0 text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":44 BE text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":45 C0 text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":46 C8 text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":43 C9 text1 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":48 4 intentry CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":222 15 cinit CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":225 15 cinit CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":244 15 cinit CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":247 16 cinit CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":253 17 cinit CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":254 17 cinit CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\PA3.as":255 18 cinit CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":48 1B text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":49 1B text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":51 1C text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":52 1E text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":53 1F text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":56 20 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":57 21 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":58 23 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":59 25 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":60 27 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":61 29 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":62 2B text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":63 2D text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":64 2F text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":65 31 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":66 36 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":68 37 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":56 38 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":70 61 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":75 63 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":76 65 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":77 66 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":78 67 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":79 67 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":80 68 text2 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":82 73 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":83 73 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":84 76 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":85 78 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":86 79 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":96 7B maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":99 7D maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":100 7E maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":102 7F maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":104 82 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":105 83 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":107 84 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":108 85 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":110 86 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":111 86 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":112 8A maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":113 8B maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":115 8C maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":117 90 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":118 99 maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":110 9D maintext CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":38 9E text1 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":39 9E text1 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":40 A2 text1 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":45 A2 text1 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":41 AA text1 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":42 AC text1 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":43 AD text1 CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\LE3-3.c":40 B3 text1 CODE
 $startup.obj
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":39 0 functab CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":40 0 functab CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":41 0 functab CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":42 0 functab CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":43 0 functab CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":44 0 functab CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":63 0 reset_vec CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":68 0 reset_vec CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":73 12 init CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":76 12 end_init CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":39 0 functab CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":40 0 functab CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":41 0 functab CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":42 0 functab CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":43 0 functab CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":44 0 functab CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":63 0 reset_vec CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":68 0 reset_vec CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":73 12 init CODE
+"C:\Users\Chrys Sean Sevilla\Desktop\School Stuff\CPE3201-Sevilla\PracticalActivities\PA3\startup.as":76 12 end_init CODE
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -152,7 +159,7 @@ $startup.obj
 %SYMTAB
 __CFG_WRT$OFF 0 0 ABS 0 - PA3.obj
 __S0 2008 0 ABS 0 - -
-__S1 79 0 ABS 0 - -
+__S1 78 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 _GIE 5F 0 ABS 0 - PA3.obj
@@ -162,9 +169,10 @@ __Lintentry 8 0 CODE 0 intentry -
 __CFG_BOREN$ON 0 0 ABS 0 - PA3.obj
 __pintentry 8 0 CODE 0 intentry PA3.obj
 __CFG_PWRTE$ON 0 0 ABS 0 - PA3.obj
+_TMR0 1 0 ABS 0 - PA3.obj
 _INTE 5C 0 ABS 0 - PA3.obj
 _INTF 59 0 ABS 0 - PA3.obj
-_main 102 0 CODE 0 maintext PA3.obj
+_main E6 0 CODE 0 maintext PA3.obj
 ___sp 0 0 STACK 2 stack startup.obj
 btemp 7E 0 ABS 0 - PA3.obj
 ltemp 7E 0 ABS 0 - PA3.obj
@@ -193,15 +201,16 @@ wtemp3 84 0 ABS 0 - PA3.obj
 ttemp4 7F 0 ABS 0 - PA3.obj
 wtemp4 86 0 ABS 0 - PA3.obj
 wtemp5 88 0 ABS 0 - PA3.obj
-__end_of_delay 194 0 CODE 0 text1 PA3.obj
+__end_of_delay 168 0 CODE 0 text1 PA3.obj
 wtemp6 7F 0 ABS 0 - PA3.obj
 interrupt_function 8 0 CODE 0 intentry PA3.obj
 __Hconfig 4010 0 CONFIG 0 config -
 __Lconfig 400E 0 CONFIG 0 config -
+delay@of_counter 22 0 BANK0 1 cstackBANK0 PA3.obj
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
-_delay 158 0 CODE 0 text1 PA3.obj
-__end_of_ISR 102 0 CODE 0 text2 PA3.obj
+_delay 13C 0 CODE 0 text1 PA3.obj
+__end_of_ISR E6 0 CODE 0 text2 PA3.obj
 __Hfunctab 0 0 CODE 0 functab -
 __Lfunctab 0 0 CODE 0 functab -
 _OPTION_REG 81 0 ABS 0 - PA3.obj
@@ -212,10 +221,9 @@ __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 _TMR0IE 5D 0 ABS 0 - PA3.obj
 _TMR0IF 5A 0 ABS 0 - PA3.obj
 ___int_sp 0 0 STACK 2 stack startup.obj
-_INTEDG 40E 0 ABS 0 - PA3.obj
 __Habs1 0 0 ABS 0 abs1 -
 __Labs1 0 0 ABS 0 abs1 -
-_myINTF 3B8 -341 COMMON 1 bitbssCOMMON PA3.obj
+_myINTF 3B0 -33A COMMON 1 bitbssCOMMON PA3.obj
 __Hsfr0 0 0 ABS 0 sfr0 -
 __Lsfr0 0 0 ABS 0 sfr0 -
 __Hsfr1 0 0 ABS 0 sfr1 -
@@ -235,7 +243,7 @@ stacklo 0 0 ABS 0 - startup.obj
 saved_w 7E 0 ABS 0 - PA3.obj
 __Hinit 24 0 CODE 0 init -
 __Linit 24 0 CODE 0 init -
-__end_of_main 158 0 CODE 0 maintext PA3.obj
+__end_of_main 13C 0 CODE 0 maintext PA3.obj
 __Htext 0 0 ABS 0 text -
 __Ltext 0 0 ABS 0 text -
 end_of_initialization 2E 0 CODE 0 cinit PA3.obj
@@ -255,7 +263,7 @@ ___latbits 2 0 ABS 0 - PA3.obj
 __Hpowerup 0 0 CODE 0 powerup -
 __Lpowerup 0 0 CODE 0 powerup -
 __ptext0 0 0 CODE 0 text0 PA3.obj
-__ptext1 158 0 CODE 0 text1 PA3.obj
+__ptext1 13C 0 CODE 0 text1 PA3.obj
 __ptext2 36 0 CODE 0 text2 PA3.obj
 __Hclrtext 0 0 ABS 0 clrtext -
 __Lclrtext 0 0 ABS 0 clrtext -
@@ -266,20 +274,21 @@ __Hstack 0 0 STACK 2 stack -
 __Lstack 0 0 STACK 2 stack -
 __Hspace_0 2008 0 ABS 0 - -
 __Lspace_0 0 0 ABS 0 - -
-__Hspace_1 3BA 0 ABS 0 - -
+delay@ms 20 0 BANK0 1 cstackBANK0 PA3.obj
+__Hspace_1 3B2 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
 __Lspace_2 0 0 ABS 0 - -
 __Hcinit 36 0 CODE 0 cinit -
 __Lcinit 2A 0 CODE 0 cinit -
-_counter 78 0 COMMON 1 bssCOMMON PA3.obj
+_counter 77 0 COMMON 1 bssCOMMON PA3.obj
 __Hspace_3 0 0 ABS 0 - -
 __Lspace_3 0 0 ABS 0 - -
 __size_of_main 0 0 ABS 0 - PA3.obj
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
-__pbssCOMMON 78 0 COMMON 1 bssCOMMON PA3.obj
-_myTMR0IF 3B9 -341 COMMON 1 bitbssCOMMON PA3.obj
+__pbssCOMMON 77 0 COMMON 1 bssCOMMON PA3.obj
+_myTMR0IF 3B1 -33A COMMON 1 bitbssCOMMON PA3.obj
 __Hend_init 2A 0 CODE 0 end_init -
 __Lend_init 24 0 CODE 0 end_init -
 __Hreset_vec 6 0 CODE 0 reset_vec -
@@ -289,7 +298,6 @@ __CFG_WDTE$OFF 0 0 ABS 0 - PA3.obj
 intlevel1 0 0 CODE 0 functab startup.obj
 intlevel2 0 0 CODE 0 functab startup.obj
 intlevel3 0 0 CODE 0 functab startup.obj
-delay@count 75 0 COMMON 1 cstackCOMMON PA3.obj
 intlevel4 0 0 CODE 0 functab startup.obj
 intlevel5 0 0 CODE 0 functab startup.obj
 __HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
@@ -299,13 +307,12 @@ __CFG_CPD$OFF 0 0 ABS 0 - PA3.obj
 start_initialization 2A 0 CODE 0 cinit PA3.obj
 __Hmaintext 0 0 ABS 0 maintext -
 __Lmaintext 0 0 ABS 0 maintext -
-__pmaintext 102 0 CODE 0 maintext PA3.obj
-delay@of_count 21 0 BANK0 1 cstackBANK0 PA3.obj
+__pmaintext E6 0 CODE 0 maintext PA3.obj
 __initialization 2A 0 CODE 0 cinit PA3.obj
 __HbitbssCOMMON 0 0 ABS 0 bitbssCOMMON -
 __LbitbssCOMMON 0 0 ABS 0 bitbssCOMMON -
 __CFG_CP$OFF 0 0 ABS 0 - PA3.obj
-__pbitbssCOMMON 3B8 -341 COMMON 1 bitbssCOMMON PA3.obj
+__pbitbssCOMMON 3B0 -33A COMMON 1 bitbssCOMMON PA3.obj
 __CFG_LVP$OFF 0 0 ABS 0 - PA3.obj
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
@@ -333,7 +340,7 @@ __CFG_LVP$OFF 0 0 ABS 0 - PA3.obj
 # All other numeric quantities are in decimal.
 %SEGMENTS
 reset_vec 0 0 0 3 2
-intentry 0 4 8 C6 2
+intentry 0 4 8 B0 2
 config 0 2007 400E 1 2
-cstackCOMMON 1 70 70 9 1
-cstackBANK0 1 20 20 4 1
+cstackCOMMON 1 70 70 8 1
+cstackBANK0 1 20 20 5 1

@@ -50,6 +50,7 @@ void delay(unsigned int ms) {
  */
 void __interrupt() ISR() {
     // Handle external interrupt (RB0/INT pin)
+    GIE = 0; // Disable global interrupts to prevent nested interrupts
     if (INTF) {
         INTF = 0;       // Clear hardware interrupt flag
         myINTF = 1;     // Set software flag for main loop
@@ -60,6 +61,7 @@ void __interrupt() ISR() {
         TMR0IF = 0;     // Clear hardware Timer0 flag
         myTMR0IF = 1;   // Set software flag for delay function
     }
+    GIE = 1; // Re-enable global interrupts
 }
  
 int main() {
