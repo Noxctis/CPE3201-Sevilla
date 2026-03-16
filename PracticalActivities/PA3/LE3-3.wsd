@@ -1,0 +1,69 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+skinparam DefaultFontName Arial
+
+partition "Main Routine" {
+    start
+    :Initialize I/O Ports (TRISA, TRISB, TRISC, TRISD);
+    :Configure OPTION_REG = 0xC4;
+    :Enable Ext Interrupt (INTF=0, INTE=1);
+    :Enable Timer0 (TMR0=0, TMR0IF=0, TMR0IE=1);
+    :Enable Global Interrupts (GIE=1);
+    :Initialize Display (PORTC = 0x00);
+    
+    while (Infinite Loop: while(1)) is (Loop)
+        if (counter == 0x09?) then (Yes)
+            :counter = 0x00;
+        else (No)
+            :counter++;
+        endif
+        
+        :Call delay(DELAY_08SEC);
+        
+        :Update Display (PORTC = counter);
+    endwhile
+}
+
+partition "Interrupt Service Routine (ISR)" {
+    start
+    :GIE = 0 (Disable Interrupts);
+    
+    if (External Interrupt: INTF == 1?) then (Yes)
+        :INTF = 0;
+        :myINTF = 1;
+        :Read Keypad (PORTD & 0x0F);
+        :Map key to ""counter"" value 
+        (Switch Statement);
+        :Update Display immediately 
+        (PORTC = counter);
+    else (No)
+    endif
+    
+    if (Timer0 Overflow: TMR0IF == 1?) then (Yes)
+        :TMR0IF = 0;
+        :myTMR0IF = 1 
+        (Signal Delay Function);
+    else (No)
+    endif
+    
+    :GIE = 1 (Re-enable Interrupts);
+    stop
+}
+
+partition "Delay Function: delay(ms)" {
+    start
+    :of_counter = 0;
+    
+    while (of_counter < ms?) is (Yes)
+        if (myTMR0IF == 1?) then (Yes)
+            :myTMR0IF = 0;
+            :of_counter++;
+        else (No)
+            :Wait in loop;
+        endif
+    endwhile (No)
+    
+    stop
+}
+@enduml
