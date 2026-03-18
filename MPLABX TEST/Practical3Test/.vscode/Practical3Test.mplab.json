@@ -1,22 +1,5 @@
 {
-    "version": "1.8",
-    "configurations": [
-        {
-            "name": "default",
-            "id": "conf1",
-            "device": "PIC16F877A",
-            "imagePath": "./out/Practical3Test/default.elf",
-            "packs": [
-                {
-                    "name": "PIC16Fxxx_DFP",
-                    "vendor": "Microchip",
-                    "version": "1.7.162"
-                }
-            ],
-            "fileSet": "default",
-            "toolchain": "default-XC8"
-        }
-    ],
+    "version": "1.9",
     "propertyGroups": [
         {
             "name": "default-XC8",
@@ -34,6 +17,24 @@
                     "exclude": "**/(_build|out|cmake|.vscode)/**/*"
                 }
             ]
+        }
+    ],
+    "configurations": [
+        {
+            "name": "default",
+            "id": "conf1",
+            "device": "PIC16F877A",
+            "imagePath": "./out/Practical3Test/default.elf",
+            "packs": [
+                {
+                    "name": "PIC16Fxxx_DFP",
+                    "vendor": "Microchip",
+                    "version": "1.7.162"
+                }
+            ],
+            "fileSet": "default",
+            "toolchain": "default-XC8",
+            "includeLegacyMacros": true
         }
     ]
 }

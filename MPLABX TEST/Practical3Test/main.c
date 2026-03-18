@@ -63,6 +63,8 @@ void __interrupt() ISR() {
     }
     GIE = 1; // Re-enable global interrupts
 }
+
+
  
 int main() {
     unsigned char counter = 0;
