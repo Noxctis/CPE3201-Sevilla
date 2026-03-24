@@ -175,7 +175,7 @@ else if (counter == 0x0E) {dataCtrl('1');dataCtrl('4');}
 			if(keypad[key]=='0'){
 			counter+=2;
 }
-else if(
+else if
         }
     }
 

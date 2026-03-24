@@ -1588,11 +1588,11 @@ counter = 0;
 }
 
 
-
 delay(61);
-while(RD4);
-if(keypad[key]=='0')
+if(keypad[key]=='0'){
 counter+=2;
+}
+else if(
 }
 }
 
