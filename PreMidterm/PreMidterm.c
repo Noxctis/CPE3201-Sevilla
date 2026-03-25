@@ -5,35 +5,42 @@
  * @brief Main function
  */
 
-#include<xc.h> // include file for the XC8 compiler 
+#include <xc.h> // include file for the XC8 compiler
 
-#define _XTAL_FREQ 4000000 // Define oscillator frequency for delay functions
-#define COUNTER_MAX 14     // Maximum counter value before reset
-#define DELAY_05SEC 61     // Timer0 overflows for ~1 second delay (prescaler 1:32)
- 
- #pragma config FOSC = XT // oscillator selection
- #pragma config WDTE = OFF // watchdog timer disabled
- #pragma config PWRTE = ON // power-up timer enabled
- #pragma config BOREN = ON // brown-out reset enabled
- #pragma config LVP = OFF // low-voltage programming disabled
- #pragma config CPD = OFF // data EEPROM code protection disabled
- #pragma config WRT = OFF // flash program memory write protection off
- #pragma config CP = OFF // code protection off
+#define _XTAL_FREQ 4000000 // Oscillator frequency
+#define COUNTER_MAX 14
+#define DELAY_05SEC 61      // 61 Timer0 overflows at 1:32 and 4MHz is ~0.5s
+#define INT_DEBOUNCE_TICKS 6
+
+#pragma config FOSC = XT
+#pragma config WDTE = OFF
+#pragma config PWRTE = ON
+#pragma config BOREN = ON
+#pragma config LVP = OFF
+#pragma config CPD = OFF
+#pragma config WRT = OFF
+#pragma config CP = OFF
+
 
 volatile __bit myINTF = 0;    // Flag set when external interrupt occurs
- volatile __bit myTMR0IF = 0;  // Flag set when Timer0 overflows
-volatile unsigned char counter = 0x00;  // Shared by ISR and main loop
+volatile __bit myTMR0IF = 0;  // Flag set when Timer0 overflows
 
+volatile unsigned char counter = COUNTER_MAX;
+volatile __bit isPaused;                  // 1 = paused, 0 = running
+volatile unsigned char tmr0Ticks = 0;     // Timer0 overflow accumulator
+volatile unsigned char intDebounceTicks = 0;
 
+// 3x4 keypad mapping table (MM74C922 outputs 0-15 linearly)
+const char keypad[] = "123 456 789 *0# ";
 
- // In your header file (.h) or at the top of main.c
-void initLCD();
+void initLCD(void);
 void instCtrl(unsigned char cmd);
 void delay(unsigned int ms);
 void dataCtrl(unsigned char data);
+void showCounter(unsigned char value);
+void showTimerCenter(void);
 
-
-void instCtrl(unsigned char cmd){
+void instCtrl(unsigned char cmd) {
     PORTC = cmd; // Send command to PORTB
     RB5 = 0; // RS = 0 for command
     RB6 = 0; // RW = 0 for write
@@ -42,8 +49,7 @@ void instCtrl(unsigned char cmd){
     RB7 = 0; // E = 0 to complete command
 }
 
-void initLCD(){
-    // Initialize LCD in 4-bit mode
+void initLCD(void) {
     delay(1);
     instCtrl(0x38); // Function set: 8-bit, 2 lines, 5x8 dots
     instCtrl(0x08); // Display off, cursor off
@@ -52,7 +58,7 @@ void initLCD(){
     instCtrl(0x0C); // Display on, cursor on, blinking on
 }
 
-void dataCtrl(unsigned char data){
+void dataCtrl(unsigned char data) {
     PORTC = data; // Send data to PORTB
     RB5 = 1; // RS = 1 for data
     RB6 = 0; // RW = 0 for write
@@ -61,123 +67,135 @@ void dataCtrl(unsigned char data){
     RB7 = 0; // E = 0 to complete data write
 }
 
-void delay(unsigned int ms){
-    // Simple delay function (not accurate)
+void delay(unsigned int ms) {
     unsigned int i, j;
-    for(i = 0; i < ms; i++){
-        for(j = 0; j < 1000; j++);
+    for (i = 0; i < ms; i++) {
+        for (j = 0; j < 1000; j++) {
+        }
     }
 }
 
+void showCounter(unsigned char value) {
+    instCtrl(0x9D); // center on second line
+    dataCtrl((value / 10) + '0');
+    dataCtrl((value % 10) + '0');
+}
 
-void delay1(unsigned int ms) {
-    unsigned int of_counter = 0;
-    while(of_counter < ms) {
-        if(myTMR0IF) {
-            myTMR0IF = 0;
-            of_counter++;
+void showTimerCenter(void) {
+    instCtrl(0xC7); // center "TIMER" on first line
+    dataCtrl('T');
+    dataCtrl('I');
+    dataCtrl('M');
+    dataCtrl('E');
+    dataCtrl('R');
+}
+
+void interrupt ISR(void) {
+    GIE = 0; // Disable global interrupts during ISR
+    if (TMR0IF) {
+        TMR0IF = 0;
+
+        if (intDebounceTicks > 0) {
+            intDebounceTicks--;
+        }
+
+        if (!isPaused) {
+            tmr0Ticks++;
+            if (tmr0Ticks >= DELAY_05SEC) {
+                tmr0Ticks = 0;
+                if (counter == 0) {
+                    counter = COUNTER_MAX; // wrap 00 -> 14 during decrement operation
+                } else {
+                    counter--; // countdown step
+                }
+            }
         }
     }
-}\
 
-void interrupt ISR(void){
-    GIE = 0; // Disable global interrupts to prevent nested interrupts
-    // Handle external interrupt (RB0/INT pin)
-    if(INTF){
-
-        INTF = 0;  // Clears interrupt flag
+    if (INTF) {
+        INTF = 0;
         myINTF = 1;
+        // Toggle only on valid press level (active-low with pull-up enabled).
+        if ((intDebounceTicks == 0) && (RB0 == 0)) {
+            isPaused = !isPaused; // start/pause toggle
+            intDebounceTicks = INT_DEBOUNCE_TICKS;
+        }
+    }
 
-    
-
-    } 
-    
 
     // Handle Timer0 overflow
     if (TMR0IF) {
         TMR0IF = 0;     // Clear hardware Timer0 flag
         myTMR0IF = 1;   // Set software flag for delay function
     }
-    GIE = 1; // Re-enable global interrupts
-
- 
 }
 
+int main(void) {
+    unsigned char key;
+    char kchar;
+    unsigned char rd4Idle;
 
-// 3x4 keypad mapping table (MM74C922 outputs 0-15 linearly)
-const char keypad[] = "123 456 789 *0# ";
+    // RB0 is external interrupt input. RB5-RB7 used for LCD control.
+    TRISB = 0x0F;
+    TRISC = 0x00;
+    TRISD = 0xFF; // RD3:RD0 keypad code, RD4 DAVBL
 
+    // RB pull-ups enabled, RB0/INT falling edge, Timer0 internal clock, prescaler 1:32
+    OPTION_REG = 0x04;
 
-int main(void){
+    isPaused = 1;
+    counter = COUNTER_MAX;
+    tmr0Ticks = 0;
+    intDebounceTicks = 0;
 
-    TRISB = 0x0F; // set PORTB as output for LCD data
-    TRISC = 0x00; // set PORTC as output for LCD control signals
-    TRISD = 0xFF; // set PORTD as input: RD3:RD0 = keypad data, RD4 = DAVBL
-
-
-OPTION_REG = 0xC4;
-
- INTF = 0;     // Clear external interrupt flag
-    INTE = 1;     // Enable external interrupt (RB0/INT)
-    TMR0 = 0;     // Clear Timer0
-    TMR0IE = 1;   // Enable Timer0 overflow interrupt
-    GIE = 1;      // Enable global interrupts
+    INTF = 0;
+    INTE = 1;
+    TMR0IF = 0;
+    TMR0 = 0;
+    TMR0IE = 1;
+    GIE = 1;
 
     initLCD();
+    rd4Idle = RD4;
 
+    while (1) {
+        showTimerCenter();
+        showCounter(counter);
 
-    while(1){
-            unsigned char key = PORTD & 0x0F; // read lower 4 bits (74C922 address)
-            while(RD4); // wait for key release
-                
-            delay(2);       // clear command needs extra delay (~1.64ms)
- 			instCtrl(0xC7); // move cursor to line 2
-				
-			dataCtrl('T');
-			dataCtrl('I'); 
-			dataCtrl('M'); 
-			dataCtrl('E'); 
-			dataCtrl('R'); 
+        // Key actions only when paused. Capture a short click with quick confirm.
+        if (RD4 != rd4Idle) {
+            delay(2);
+            if (RD4 != rd4Idle) {
+                key = PORTD & 0x0F;
+                kchar = keypad[key];
 
-			instCtrl(0x9D); // move cursor to line 3
-			
-			
+                if (isPaused) {
+                    if (kchar == '0') {
+                        counter = COUNTER_MAX;
+                    } else if (kchar == '*') {
+                        if (counter == 0) {
+                            counter = COUNTER_MAX;
+                        } else {
+                            counter--;
+                        }
+                    } else if (kchar == '#') {
+                        if (counter >= COUNTER_MAX) {
+                            counter = 0;
+                        } else {
+                            counter++;
+                        }
+                    }
 
-if (counter == 0x00) {dataCtrl('0');dataCtrl(' ');}
-else if (counter == 0x01) {dataCtrl('1');dataCtrl(' ');}
-else if (counter == 0x02) {dataCtrl('2');dataCtrl(' ');}
-else if (counter == 0x03) {dataCtrl('3');dataCtrl(' ');}
-else if (counter == 0x04) {dataCtrl('4');dataCtrl(' ');}
-else if (counter == 0x05) {dataCtrl('5');dataCtrl(' ');}
-else if (counter == 0x06) {dataCtrl('6');dataCtrl(' ');}
-else if (counter == 0x07) {dataCtrl('7');dataCtrl(' ');}
-else if (counter == 0x08) {dataCtrl('8');dataCtrl(' ');}
-else if (counter == 0x09) {dataCtrl('9');dataCtrl(' ');}
-else if (counter == 0x0A) {dataCtrl('1');dataCtrl('0');}
-else if (counter == 0x0B) {dataCtrl('1');dataCtrl('1');}
-else if (counter == 0x0C) {dataCtrl('1');dataCtrl('2');}
-else if (counter == 0x0D) {dataCtrl('1');dataCtrl('3');}
-else if (counter == 0x0E) {dataCtrl('1');dataCtrl('4');}			
+                    // Update display immediately after keypad edit while paused.
+                    showCounter(counter);
+                }
 
-			if(myINTF) {
-            //myINTF = 0;  // Clear software flag
-            
-            // Increment counter
-            counter++;
-	
-            // Reset counter if it reaches maximum
-            if(counter > COUNTER_MAX) {
-                counter = 0;
+                while (RD4 != rd4Idle) {
+                }
+                delay(2);
             }
-            
-            // Delay for debouncing and visual feedback
-            delay(DELAY_05SEC);
-			if(keypad[key]=='0'){
-			counter+=2;
-}
-else if
         }
-    }
 
-    return 0;
+        delay(1);
+    }
 }
