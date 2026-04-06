@@ -1,5 +1,5 @@
 
-# 1 "Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c"
+# 1 "Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-7.c"
 
 # 21 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -1425,76 +1425,8 @@ extern void memcpyee(__eeprom unsigned char *to, const unsigned char *from, unsi
 #pragma intrinsic(_delay)
 extern __nonreentrant void _delay(unsigned long);
 
-# 8 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
-typedef int ptrdiff_t;
-typedef unsigned size_t;
-typedef unsigned short wchar_t;
 
-# 7 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdarg.h"
-typedef void * va_list[1];
-
-#pragma intrinsic(__va_start)
-extern void * __va_start(void);
-
-#pragma intrinsic(__va_arg)
-extern void * __va_arg(void *, ...);
-
-# 23 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
-extern int errno;
-
-# 54
-struct __prbuf
-{
-char * ptr;
-void (* func)(char);
-};
-
-# 17 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\conio.h"
-extern int errno;
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-# 31
-extern char * cgets(char *);
-extern void cputs(const char *);
-
-# 99 "C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h"
-extern int cprintf(char *, ...);
-#pragma printf_check(cprintf)
-
-
-
-extern int _doprnt(struct __prbuf *, const register char *, register va_list);
-
-
-# 191
-#pragma printf_check(vprintf) const
-#pragma printf_check(vsprintf) const
-
-extern char * gets(char *);
-extern int puts(const char *);
-extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
-extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
-extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
-extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
-extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
-extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
-
-#pragma printf_check(printf) const
-#pragma printf_check(sprintf) const
-extern int sprintf(char *, const char *, ...);
-extern int printf(const char *, ...);
-
-
-# 13 "Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c"
+# 6 "Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-7.c"
 #pragma config FOSC = XT
 #pragma config WDTE = OFF
 #pragma config PWRTE = ON
@@ -1504,128 +1436,64 @@ extern int printf(const char *, ...);
 #pragma config WRT = OFF
 #pragma config CP = OFF
 
-# 29
-volatile unsigned int period = 0;
+void PWM_INIT(unsigned int freq, float duty);
 
 
-void initLCD();
-void instCtrl(unsigned char cmd);
-void dataCtrl(unsigned char data);
-void delay(unsigned int ms);
-void printString(const char *str);
-void printNumber(unsigned int num);
+unsigned int freq[] = {500, 700, 1000};
+float dutyCyclePercent[] = {0.10, 0.25, 0.50, 0.75, 0.95};
 
-void instCtrl(unsigned char cmd){
-PORTB = cmd;
-RC5 = 0;
-RC7 = 0;
-RC6 = 1;
-delay(1);
-RC6 = 0;
-}
-
-void initLCD(){
-delay(15);
-instCtrl(0x38);
-instCtrl(0x08);
-instCtrl(0x01);
-delay(2);
-instCtrl(0x06);
-instCtrl(0x0C);
-}
-
-void dataCtrl(unsigned char data){
-PORTB = data;
-RC5 = 1;
-RC7 = 0;
-RC6 = 1;
-delay(1);
-RC6 = 0;
-}
-
-void delay(unsigned int ms){
-unsigned int i, j;
-for(i = 0; i < ms; i++){
-for(j = 0; j < 1000; j++);
-}
-}
-
-void printString(const char *str) {
-while(*str) {
-dataCtrl(*str++);
-}
-}
-
-void printNumber(unsigned int num) {
-char buffer[6];
-int i = 5;
-
-buffer[--i] = '\0';
+int freqIndex = 0;
+int dutyIndex = 0;
 
 
-if (num == 0) {
-buffer[--i] = '0';
-} else {
-while (num > 0 && i > 0) {
-buffer[--i] = (num % 10) + '0';
-num /= 10;
-}
-}
-
-
-printString(&buffer[i]);
-}
-
-
-void interrupt ISR(void)
+void PWM_INIT(unsigned int freq, float duty)
 {
-GIE = 0;
-if(CCP1IF==1)
-{
-CCP1IF = 0;
-TMR1 = 0;
-RA0 = RA0^1;
 
 
-period = CCPR1/125;
+PR2 = (unsigned char)((4000000 / (4UL * freq * 16)) - 1);
 
 
-}
-GIE = 1;
+
+
+unsigned int dutyValue = (unsigned int)(duty * (PR2 + 1) * 4);
+
+
+
+CCPR1L = (unsigned char)(dutyValue >> 2);
+
+
+
+CCP1CON = (0x0C | ((dutyValue & 0x03) << 4));
+
+
+TRISC2 = 0;
+T2CON = 0x06;
 }
 
 void main(void)
 {
-ADCON1 = 0x06;
-TRISB = 0x00;
-TRISA = 0x00;
-TRISC = 0x04;
 
-T1CON = 0x30;
-CCP1CON = 0x05;
-CCP1IE = 1;
-CCP1IF = 0;
-PEIE = 1;
-GIE = 1;
-TMR1ON = 1;
+TRISD = 0xFF;
+TRISC = 0x00;
 
-initLCD();
+PWM_INIT(freq[freqIndex], dutyCyclePercent[dutyIndex]);
 
-instCtrl(0x80);
-printString("Period:");
+for (;;) {
+if (RD0) {
+_delay((unsigned long)((50)*(4000000/4000.0)));
 
-for(;;)
-{
-instCtrl(0xC0);
+freqIndex = (freqIndex + 1) % 3;
+PWM_INIT(freq[freqIndex], dutyCyclePercent[dutyIndex]);
 
+while (RD0);
+}
+else if (RD1) {
+_delay((unsigned long)((50)*(4000000/4000.0)));
 
-printString("                    ");
+dutyIndex = (dutyIndex + 1) % 5;
+PWM_INIT(freq[freqIndex], dutyCyclePercent[dutyIndex]);
 
-instCtrl(0xC0);
-
-printNumber(period);
-printString(" ms");
-
-delay(20);
+while (RD1);
+}
 }
 }

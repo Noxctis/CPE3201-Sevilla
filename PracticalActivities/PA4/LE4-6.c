@@ -108,8 +108,7 @@ void interrupt ISR(void)
         RA0 = RA0^1;
         // Use unsigned long to prevent overflow at low frequencies,
         // and add + 500 to mathematically round up before truncation.
-        period = CCPR1 * 8;
-	period = period/1000;
+        period = CCPR1/125;
        
        //period = (unsigned int)(((unsigned long)CCPR1 * 8) / 1000);
     }      
