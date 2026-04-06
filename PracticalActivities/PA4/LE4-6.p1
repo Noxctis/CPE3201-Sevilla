@@ -9,8 +9,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RC6 `Vb ~T0 @X0 0 e@62 ]
 "35 Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c
 [v _delay `(v ~T0 @X0 0 ef1`ui ]
-"205 C:\Program Files (x86)\Microchip\xc8\v1.33\include\stdio.h
-[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
 "2441 C:\Program Files (x86)\Microchip\xc8\v1.33\include\pic16f877a.h
 [v _GIE `Vb ~T0 @X0 0 e@95 ]
 "2353
@@ -1280,149 +1278,186 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _num `ui ~T0 @X0 1 r1 ]
 [f ]
 "81
-[v _buffer `uc ~T0 @X0 -> 16 `i a ]
-[; ;LE4-6.c: 81: char buffer[16];
-[; ;LE4-6.c: 82: sprintf(buffer, "%u", num);
+[v _buffer `uc ~T0 @X0 -> 6 `i a ]
 "82
-[e ( _sprintf (1 , (. , &U _buffer :s 1C _num ]
-[; ;LE4-6.c: 83: printString(buffer);
-"83
-[e ( _printString (1 -> &U _buffer `*Cuc ]
-[; ;LE4-6.c: 84: }
+[v _i `i ~T0 @X0 1 a ]
+[; ;LE4-6.c: 81: char buffer[6];
+[; ;LE4-6.c: 82: int i = 5;
+[e = _i -> 5 `i ]
+[; ;LE4-6.c: 84: buffer[--i] = '\0';
 "84
-[e :UE 112 ]
-}
-[v F1176 `(v ~T0 @X0 1 tf ]
+[e = *U + &U _buffer * -> -> =- _i -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 0 `ui `uc ]
+[; ;LE4-6.c: 87: if (num == 0) {
 "87
-[v _ISR `IF1176 ~T0 @X0 1 e ]
+[e $ ! == _num -> -> 0 `i `ui 113  ]
+{
+[; ;LE4-6.c: 88: buffer[--i] = '0';
 "88
-{
-[; ;LE4-6.c: 87: void interrupt ISR(void)
-[; ;LE4-6.c: 88: {
-[e :U _ISR ]
-[f ]
-[; ;LE4-6.c: 89: GIE = 0;
+[e = *U + &U _buffer * -> -> =- _i -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> -> 48 `ui `uc ]
 "89
-[e = _GIE -> -> 0 `i `b ]
-[; ;LE4-6.c: 90: if(CCP1IF==1)
-"90
-[e $ ! == -> _CCP1IF `i -> 1 `i 114  ]
-[; ;LE4-6.c: 91: {
-"91
+}
+[; ;LE4-6.c: 89: } else {
+[e $U 114  ]
+[e :U 113 ]
 {
-[; ;LE4-6.c: 92: CCP1IF = 0;
+[; ;LE4-6.c: 90: while (num > 0 && i > 0) {
+"90
+[e $U 115  ]
+[e :U 116 ]
+{
+[; ;LE4-6.c: 91: buffer[--i] = (num % 10) + '0';
+"91
+[e = *U + &U _buffer * -> -> =- _i -> 1 `i `ui `ux -> -> # *U &U _buffer `ui `ux -> + % _num -> -> 10 `i `ui -> 48 `ui `uc ]
+[; ;LE4-6.c: 92: num /= 10;
 "92
-[e = _CCP1IF -> -> 0 `i `b ]
-[; ;LE4-6.c: 93: TMR1 = 0;
+[e =/ _num -> -> 10 `uc `ui ]
 "93
-[e = _TMR1 -> -> 0 `i `us ]
-[; ;LE4-6.c: 94: RA0 = RA0^1;
+}
+[e :U 115 ]
+"90
+[e $ && > _num -> -> 0 `i `ui > _i -> 0 `i 116  ]
+[e :U 117 ]
 "94
-[e = _RA0 -> ^ -> _RA0 `i -> 1 `i `b ]
-[; ;LE4-6.c: 97: period = CCPR1 * 8;
-"97
-[e = _period * -> _CCPR1 `ui -> -> 8 `i `ui ]
-[; ;LE4-6.c: 98: period = CCPR1/1000;
-"98
-[e = _period / -> _CCPR1 `ui -> -> 1000 `i `ui ]
-"99
 }
 [e :U 114 ]
-[; ;LE4-6.c: 99: }
-[; ;LE4-6.c: 100: GIE = 1;
-"100
-[e = _GIE -> -> 1 `i `b ]
-[; ;LE4-6.c: 101: }
-"101
-[e :UE 113 ]
+[; ;LE4-6.c: 93: }
+[; ;LE4-6.c: 94: }
+[; ;LE4-6.c: 97: printString(&buffer[i]);
+"97
+[e ( _printString (1 -> &U *U + &U _buffer * -> -> _i `ui `ux -> -> # *U &U _buffer `ui `ux `*Cuc ]
+[; ;LE4-6.c: 98: }
+"98
+[e :UE 112 ]
 }
-"103
-[v _main `(v ~T0 @X0 1 ef ]
-"104
+[v F1177 `(v ~T0 @X0 1 tf ]
+"101
+[v _ISR `IF1177 ~T0 @X0 1 e ]
+"102
 {
-[; ;LE4-6.c: 103: void main(void)
-[; ;LE4-6.c: 104: {
+[; ;LE4-6.c: 101: void interrupt ISR(void)
+[; ;LE4-6.c: 102: {
+[e :U _ISR ]
+[f ]
+[; ;LE4-6.c: 103: GIE = 0;
+"103
+[e = _GIE -> -> 0 `i `b ]
+[; ;LE4-6.c: 104: if(CCP1IF==1)
+"104
+[e $ ! == -> _CCP1IF `i -> 1 `i 119  ]
+[; ;LE4-6.c: 105: {
+"105
+{
+[; ;LE4-6.c: 106: CCP1IF = 0;
+"106
+[e = _CCP1IF -> -> 0 `i `b ]
+[; ;LE4-6.c: 107: TMR1 = 0;
+"107
+[e = _TMR1 -> -> 0 `i `us ]
+[; ;LE4-6.c: 108: RA0 = RA0^1;
+"108
+[e = _RA0 -> ^ -> _RA0 `i -> 1 `i `b ]
+[; ;LE4-6.c: 111: period = CCPR1 * 8;
+"111
+[e = _period * -> _CCPR1 `ui -> -> 8 `i `ui ]
+[; ;LE4-6.c: 112: period = period/1000;
+"112
+[e = _period / _period -> -> 1000 `i `ui ]
+"115
+}
+[e :U 119 ]
+[; ;LE4-6.c: 115: }
+[; ;LE4-6.c: 116: GIE = 1;
+"116
+[e = _GIE -> -> 1 `i `b ]
+[; ;LE4-6.c: 117: }
+"117
+[e :UE 118 ]
+}
+"119
+[v _main `(v ~T0 @X0 1 ef ]
+"120
+{
+[; ;LE4-6.c: 119: void main(void)
+[; ;LE4-6.c: 120: {
 [e :U _main ]
 [f ]
-[; ;LE4-6.c: 105: ADCON1 = 0x06;
-"105
-[e = _ADCON1 -> -> 6 `i `uc ]
-[; ;LE4-6.c: 106: TRISB = 0x00;
-"106
-[e = _TRISB -> -> 0 `i `uc ]
-[; ;LE4-6.c: 107: TRISA = 0x00;
-"107
-[e = _TRISA -> -> 0 `i `uc ]
-[; ;LE4-6.c: 108: TRISC = 0x04;
-"108
-[e = _TRISC -> -> 4 `i `uc ]
-[; ;LE4-6.c: 110: T1CON = 0x30;
-"110
-[e = _T1CON -> -> 48 `i `uc ]
-[; ;LE4-6.c: 111: CCP1CON = 0x05;
-"111
-[e = _CCP1CON -> -> 5 `i `uc ]
-[; ;LE4-6.c: 112: CCP1IE = 1;
-"112
-[e = _CCP1IE -> -> 1 `i `b ]
-[; ;LE4-6.c: 113: CCP1IF = 0;
-"113
-[e = _CCP1IF -> -> 0 `i `b ]
-[; ;LE4-6.c: 114: PEIE = 1;
-"114
-[e = _PEIE -> -> 1 `i `b ]
-[; ;LE4-6.c: 115: GIE = 1;
-"115
-[e = _GIE -> -> 1 `i `b ]
-[; ;LE4-6.c: 116: TMR1ON = 1;
-"116
-[e = _TMR1ON -> -> 1 `i `b ]
-[; ;LE4-6.c: 118: initLCD();
-"118
-[e ( _initLCD ..  ]
-[; ;LE4-6.c: 120: instCtrl(0x80);
-"120
-[e ( _instCtrl (1 -> -> 128 `i `uc ]
-[; ;LE4-6.c: 121: printString("Period:");
+[; ;LE4-6.c: 121: ADCON1 = 0x06;
 "121
-[e ( _printString (1 :s 2C ]
-[; ;LE4-6.c: 123: for(;;)
+[e = _ADCON1 -> -> 6 `i `uc ]
+[; ;LE4-6.c: 122: TRISB = 0x00;
+"122
+[e = _TRISB -> -> 0 `i `uc ]
+[; ;LE4-6.c: 123: TRISA = 0x00;
 "123
-{
+[e = _TRISA -> -> 0 `i `uc ]
+[; ;LE4-6.c: 124: TRISC = 0x04;
 "124
-[e :U 116 ]
-[; ;LE4-6.c: 124: {
-{
-[; ;LE4-6.c: 125: instCtrl(0xC0);
-"125
-[e ( _instCtrl (1 -> -> 192 `i `uc ]
-[; ;LE4-6.c: 128: printString("                    ");
+[e = _TRISC -> -> 4 `i `uc ]
+[; ;LE4-6.c: 126: T1CON = 0x30;
+"126
+[e = _T1CON -> -> 48 `i `uc ]
+[; ;LE4-6.c: 127: CCP1CON = 0x05;
+"127
+[e = _CCP1CON -> -> 5 `i `uc ]
+[; ;LE4-6.c: 128: CCP1IE = 1;
 "128
-[e ( _printString (1 :s 3C ]
-[; ;LE4-6.c: 130: instCtrl(0xC0);
+[e = _CCP1IE -> -> 1 `i `b ]
+[; ;LE4-6.c: 129: CCP1IF = 0;
+"129
+[e = _CCP1IF -> -> 0 `i `b ]
+[; ;LE4-6.c: 130: PEIE = 1;
 "130
-[e ( _instCtrl (1 -> -> 192 `i `uc ]
-[; ;LE4-6.c: 132: printNumber(period);
+[e = _PEIE -> -> 1 `i `b ]
+[; ;LE4-6.c: 131: GIE = 1;
+"131
+[e = _GIE -> -> 1 `i `b ]
+[; ;LE4-6.c: 132: TMR1ON = 1;
 "132
-[e ( _printNumber (1 _period ]
-[; ;LE4-6.c: 133: printString(" ms");
-"133
-[e ( _printString (1 :s 4C ]
-[; ;LE4-6.c: 135: delay(20);
-"135
-[e ( _delay (1 -> -> 20 `i `ui ]
+[e = _TMR1ON -> -> 1 `i `b ]
+[; ;LE4-6.c: 134: initLCD();
+"134
+[e ( _initLCD ..  ]
+[; ;LE4-6.c: 136: instCtrl(0x80);
 "136
-}
-[; ;LE4-6.c: 136: }
-[e $U 116  ]
-[e :U 117 ]
-}
-[; ;LE4-6.c: 137: }
+[e ( _instCtrl (1 -> -> 128 `i `uc ]
+[; ;LE4-6.c: 137: printString("Period:");
 "137
-[e :UE 115 ]
+[e ( _printString (1 :s 1C ]
+[; ;LE4-6.c: 139: for(;;)
+"139
+{
+"140
+[e :U 121 ]
+[; ;LE4-6.c: 140: {
+{
+[; ;LE4-6.c: 141: instCtrl(0xC0);
+"141
+[e ( _instCtrl (1 -> -> 192 `i `uc ]
+[; ;LE4-6.c: 144: printString("                    ");
+"144
+[e ( _printString (1 :s 2C ]
+[; ;LE4-6.c: 146: instCtrl(0xC0);
+"146
+[e ( _instCtrl (1 -> -> 192 `i `uc ]
+[; ;LE4-6.c: 148: printNumber(period);
+"148
+[e ( _printNumber (1 _period ]
+[; ;LE4-6.c: 149: printString(" ms");
+"149
+[e ( _printString (1 :s 3C ]
+[; ;LE4-6.c: 151: delay(20);
+"151
+[e ( _delay (1 -> -> 20 `i `ui ]
+"152
 }
-[p f _sprintf 8389632 ]
-[a 1C 37 117 0 ]
-[a 4C 32 109 115 0 ]
-[a 2C 80 101 114 105 111 100 58 0 ]
-[a 3C 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 0 ]
+[; ;LE4-6.c: 152: }
+[e $U 121  ]
+[e :U 122 ]
+}
+[; ;LE4-6.c: 153: }
+"153
+[e :UE 120 ]
+}
+[a 3C 32 109 115 0 ]
+[a 1C 80 101 114 105 111 100 58 0 ]
+[a 2C 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 0 ]

@@ -78,9 +78,23 @@ void printString(const char *str) {
 }
 
 void printNumber(unsigned int num) {
-    char buffer[16]; 
-    sprintf(buffer, "%u", num); 
-    printString(buffer); 
+    char buffer[6]; // Max value for 16-bit uint is 65535 (5 digits + null)
+    int i = 5;
+    
+    buffer[--i] = '\0'; // Place null terminator at the end
+
+    // Handle the case where num is exactly 0
+    if (num == 0) {
+        buffer[--i] = '0';
+    } else {
+        while (num > 0 && i > 0) {
+            buffer[--i] = (num % 10) + '0';
+            num /= 10;
+        }
+    }
+
+    // printString will now start printing from the first actual digit
+    printString(&buffer[i]); 
 }
 
 // ISR with Unsigned Long Cast and Rounding Math Fix applied
@@ -95,7 +109,9 @@ void interrupt ISR(void)
         // Use unsigned long to prevent overflow at low frequencies,
         // and add + 500 to mathematically round up before truncation.
         period = CCPR1 * 8;
-	period = CCPR1/1000;
+	period = period/1000;
+       
+       //period = (unsigned int)(((unsigned long)CCPR1 * 8) / 1000);
     }      
     GIE = 1; 
 }

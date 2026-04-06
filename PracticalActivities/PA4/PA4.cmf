@@ -18,41 +18,40 @@ config CONFIG 0 2007 2007 1 2
 $PA4.obj
 cinit CODE 0 15 15 6 2
 intentry CODE 0 4 4 E 2
-text11 CODE 0 1C5 1C5 3E 2
-text10 CODE 0 203 203 3C 2
-text9 CODE 0 2A8 2A8 29 2
-text8 CODE 0 325 325 13 2
-text7 CODE 0 275 275 33 2
-text6 CODE 0 312 312 13 2
-text5 CODE 0 2D1 2D1 25 2
-text4 CODE 0 147 147 40 2
-text3 CODE 0 23F 23F 36 2
-text2 CODE 0 1B 1B C4 2
-text1 CODE 0 2F6 2F6 1C 2
-maintext CODE 0 DF DF 68 2
-cstackBANK0 BANK0 1 20 20 30 1
+text10 CODE 0 139 139 3E 2
+text9 CODE 0 177 177 3C 2
+text8 CODE 0 24D 24D 29 2
+text7 CODE 0 2AE 2AE 13 2
+text6 CODE 0 1E9 1E9 33 2
+text5 CODE 0 F9 F9 40 2
+text4 CODE 0 1B3 1B3 36 2
+text3 CODE 0 29B 29B 13 2
+text2 CODE 0 276 276 25 2
+text1 CODE 0 1B 1B 76 2
+maintext CODE 0 91 91 68 2
+cstackBANK0 BANK0 1 20 20 14 1
 cstackCOMMON COMMON 1 70 70 E 1
-bssBANK0 BANK0 1 50 50 2 1
-strings STRING 0 187 187 3E 2
+bssBANK0 BANK0 1 34 34 2 1
+strings STRING 0 21C 21C 31 2
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
 #    <class name> <range> <delta>
 # Addresses given in the range are in hexadecimal and units of delta.
 %UNUSED
-BANK0 0052-006F 1
+BANK0 0036-006F 1
 BANK1 00A0-00EF 1
 BANK2 0110-016F 1
 BANK3 0190-01EF 1
 CODE 0003-0003 2
-CODE 0338-1FFF 2
+CODE 02C1-1FFF 2
 CONST 0003-0003 2
-CONST 0338-1FFF 2
+CONST 02C1-1FFF 2
 EEDATA 2100-21FF 2
 ENTRY 0003-0003 2
-ENTRY 0338-1FFF 2
+ENTRY 02C1-1FFF 2
 IDLOC 2000-2003 2
-RAM 0052-006F 1
+RAM 0036-006F 1
 RAM 00A0-00EF 1
 RAM 0110-016F 1
 RAM 0190-01EF 1
@@ -62,9 +61,9 @@ SFR2 0100-010F 1
 SFR3 0180-018F 1
 STACK 0110-016F 1
 STRCODE 0003-0003 2
-STRCODE 0338-1FFF 2
+STRCODE 02C1-1FFF 2
 STRING 0003-0003 2
-STRING 0338-1FFF 2
+STRING 02C1-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -79,146 +78,132 @@ STRING 0338-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $PA4.obj
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":87 4 intentry CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":342 15 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":345 15 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":355 15 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":356 16 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":362 17 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":363 17 cinit CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":364 18 cinit CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":492 1B text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":542 1E text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":545 22 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":547 32 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":550 36 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":551 41 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":557 42 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":644 43 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":827 44 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":831 48 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":644 49 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1295 5B text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1314 67 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1315 6D text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1314 86 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1481 8E text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1483 92 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1498 9A text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1533 CE text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1483 D9 text2 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\doprnt.c":1547 DA text2 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":103 DF maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":105 DF maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":106 E3 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":107 E4 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":108 E5 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":110 E7 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":111 EB maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":112 ED maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":113 F0 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":114 F3 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":115 F4 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":116 F5 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":118 F6 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":120 FB maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":121 101 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":125 10C maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":128 112 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":130 11D maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":132 123 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":133 130 maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":135 13B maintext CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":136 146 maintext CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":6 147 text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":14 147 text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":15 14B text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":16 14F text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":17 151 text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":18 153 text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":19 15A text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":17 15E text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":22 15F text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":23 166 text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":24 16E text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":25 174 text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":27 175 text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":28 17C text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":30 180 text4 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":6 1C5 text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":14 1C5 text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":15 1C7 text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":16 1CB text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":17 1CD text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":18 1CF text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":19 1D6 text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":17 1DA text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":22 1DB text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":23 1E2 text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":24 1EA text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":25 1F0 text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":27 1F1 text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":28 1F8 text11 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":30 1FC text11 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":87 203 text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":89 203 text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":90 204 text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":92 206 text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":93 207 text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":94 209 text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":97 20B text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":98 21C text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":100 233 text10 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":101 234 text10 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":6 23F text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":13 23F text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":14 245 text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":15 247 text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":16 249 text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":17 250 text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":15 254 text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":20 255 text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":21 25D text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":22 263 text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":23 26A text3 CODE
-"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":25 26E text3 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":48 275 text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":49 275 text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":50 280 text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":51 286 text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":52 28C text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":53 292 text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":54 29D text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":55 2A3 text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":56 2A7 text7 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":67 2A8 text9 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":69 2A8 text9 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":70 2B4 text9 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":69 2CA text9 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":74 2D1 text5 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":75 2D1 text5 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":76 2DF text5 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":75 2F5 text5 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":80 2F6 text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":82 2F6 text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":83 308 text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":84 311 text1 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":58 312 text6 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":59 315 text6 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":60 317 text6 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":61 318 text6 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":62 319 text6 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":63 31A text6 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":64 321 text6 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":65 324 text6 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":39 325 text8 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":40 328 text8 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":41 32A text8 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":42 32B text8 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":43 32C text8 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":44 32D text8 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":45 334 text8 CODE
-"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":46 337 text8 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":101 4 intentry CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":313 15 cinit CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":316 15 cinit CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":326 15 cinit CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":327 16 cinit CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":333 17 cinit CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":334 17 cinit CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\PA4.as":335 18 cinit CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":80 1B text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":82 1B text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":84 21 text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":87 2C text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":88 30 text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":89 3D text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":91 3E text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":92 60 text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":90 77 text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":97 86 text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":98 90 text1 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":119 91 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":121 91 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":122 95 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":123 96 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":124 97 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":126 99 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":127 9D maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":128 9F maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":129 A2 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":130 A5 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":131 A6 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":132 A7 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":134 A8 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":136 AD maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":137 B3 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":141 BE maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":144 C4 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":146 CF maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":148 D5 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":149 E2 maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":151 ED maintext CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":152 F8 maintext CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":6 F9 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":14 F9 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":15 FD text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":16 101 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":17 103 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":18 105 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":19 10C text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":17 110 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":22 111 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":23 118 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":24 120 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":25 126 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":27 127 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":28 12E text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":30 132 text5 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":6 139 text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":14 139 text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":15 13B text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":16 13F text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":17 141 text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":18 143 text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":19 14A text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":17 14E text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":22 14F text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":23 156 text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":24 15E text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":25 164 text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":27 165 text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":28 16C text10 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwdiv.c":30 170 text10 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":101 177 text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":103 177 text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":104 178 text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":106 17A text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":107 17B text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":108 17D text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":111 17F text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":112 190 text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":116 1A7 text9 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":117 1A8 text9 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":6 1B3 text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":13 1B3 text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":14 1B9 text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":15 1BB text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":16 1BD text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":17 1C4 text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":15 1C8 text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":20 1C9 text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":21 1D1 text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":22 1D7 text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":23 1DE text4 CODE
+"C:\Program Files (x86)\Microchip\xc8\v1.33\sources\common\lwmod.c":25 1E2 text4 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":48 1E9 text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":49 1E9 text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":50 1F4 text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":51 1FA text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":52 200 text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":53 206 text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":54 211 text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":55 217 text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":56 21B text6 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":67 24D text8 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":69 24D text8 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":70 259 text8 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":69 26F text8 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":74 276 text2 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":75 276 text2 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":76 284 text2 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":75 29A text2 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":58 29B text3 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":59 29E text3 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":60 2A0 text3 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":61 2A1 text3 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":62 2A2 text3 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":63 2A3 text3 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":64 2AA text3 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":65 2AD text3 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":39 2AE text7 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":40 2B1 text7 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":41 2B3 text7 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":42 2B4 text7 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":43 2B5 text7 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":44 2B6 text7 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":45 2BD text7 CODE
+"Z:\CPE3201-Sevilla\PracticalActivities\PA4\LE4-6.c":46 2C0 text7 CODE
 $startup.obj
 "Z:\CPE3201-Sevilla\PracticalActivities\PA4\startup.as":39 0 functab CODE
 "Z:\CPE3201-Sevilla\PracticalActivities\PA4\startup.as":40 0 functab CODE
@@ -243,8 +228,7 @@ $startup.obj
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
 ___lwdiv@dividend 22 0 BANK0 1 cstackBANK0 PA4.obj
-__end_of_printNumber 624 0 CODE 0 text1 PA4.obj
-sprintf@f 2E 0 BANK0 1 cstackBANK0 PA4.obj
+__end_of_printNumber 122 0 CODE 0 text1 PA4.obj
 ___lwdiv@counter 27 0 BANK0 1 cstackBANK0 PA4.obj
 __CFG_WRT$OFF 0 0 ABS 0 - PA4.obj
 _RA0 28 0 ABS 0 - PA4.obj
@@ -256,17 +240,17 @@ __S1 7E 0 ABS 0 - -
 __S2 0 0 ABS 0 - -
 __S3 0 0 ABS 0 - -
 _GIE 5F 0 ABS 0 - PA4.obj
-_ISR 406 0 CODE 0 text10 PA4.obj
+_ISR 2EE 0 CODE 0 text9 PA4.obj
 __Hintentry 24 0 CODE 0 intentry -
 __Lintentry 8 0 CODE 0 intentry -
 __CFG_BOREN$ON 0 0 ABS 0 - PA4.obj
 __pintentry 8 0 CODE 0 intentry PA4.obj
 __size_of_printNumber 0 0 ABS 0 - PA4.obj
-__end_of_printString 5EC 0 CODE 0 text5 PA4.obj
+__end_of_printString 536 0 CODE 0 text2 PA4.obj
 __CFG_PWRTE$ON 0 0 ABS 0 - PA4.obj
 _TMR1 E 0 ABS 0 - PA4.obj
 _PEIE 5E 0 ABS 0 - PA4.obj
-_main 1BE 0 CODE 0 maintext PA4.obj
+_main 122 0 CODE 0 maintext PA4.obj
 ___sp 0 0 STACK 2 stack startup.obj
 btemp 7E 0 ABS 0 - PA4.obj
 ltemp 7E 0 ABS 0 - PA4.obj
@@ -294,23 +278,22 @@ ttemp3 87 0 ABS 0 - PA4.obj
 wtemp3 84 0 ABS 0 - PA4.obj
 ttemp4 7F 0 ABS 0 - PA4.obj
 wtemp4 86 0 ABS 0 - PA4.obj
-_printString 5A2 0 CODE 0 text5 PA4.obj
+_printString 4EC 0 CODE 0 text2 PA4.obj
 wtemp5 88 0 ABS 0 - PA4.obj
-__end_of_delay 5A2 0 CODE 0 text9 PA4.obj
+__end_of_delay 4EC 0 CODE 0 text8 PA4.obj
 wtemp6 7F 0 ABS 0 - PA4.obj
 interrupt_function 8 0 CODE 0 intentry PA4.obj
 __Hconfig 4010 0 CONFIG 0 config -
 __Lconfig 400E 0 CONFIG 0 config -
-__end_of__stringtab 32E 0 STRING 0 strings PA4.obj
-?___lwmod 28 0 BANK0 1 cstackBANK0 PA4.obj
+__end_of__stringtab 458 0 STRING 0 strings PA4.obj
+?___lwmod 20 0 BANK0 1 cstackBANK0 PA4.obj
 __Hram 0 0 ABS 0 ram -
 __Lram 0 0 ABS 0 ram -
-__end_of__stringdata 38A 0 STRING 0 strings PA4.obj
-_delay 550 0 CODE 0 text9 PA4.obj
-?_sprintf 2E 0 BANK0 1 cstackBANK0 PA4.obj
-_dataCtrl 624 0 CODE 0 text6 PA4.obj
-__end_of_ISR 47E 0 CODE 0 text10 PA4.obj
-_instCtrl 64A 0 CODE 0 text8 PA4.obj
+__end_of__stringdata 49A 0 STRING 0 strings PA4.obj
+_delay 49A 0 CODE 0 text8 PA4.obj
+_dataCtrl 536 0 CODE 0 text3 PA4.obj
+__end_of_ISR 366 0 CODE 0 text9 PA4.obj
+_instCtrl 55C 0 CODE 0 text7 PA4.obj
 __Hfunctab 0 0 CODE 0 functab -
 __Lfunctab 0 0 CODE 0 functab -
 _ADCON1 9F 0 ABS 0 - PA4.obj
@@ -320,7 +303,6 @@ __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Leeprom_data 0 0 EEDATA 3 eeprom_data -
 _CCP1IE 462 0 ABS 0 - PA4.obj
 _CCP1IF 62 0 ABS 0 - PA4.obj
-sprintf@ap 35 0 BANK0 1 cstackBANK0 PA4.obj
 ___int_sp 0 0 STACK 2 stack startup.obj
 ?___lwdiv 20 0 BANK0 1 cstackBANK0 PA4.obj
 _TMR1ON 80 0 ABS 0 - PA4.obj
@@ -334,18 +316,16 @@ __Hsfr2 0 0 ABS 0 sfr2 -
 __Lsfr2 0 0 ABS 0 sfr2 -
 __Hsfr3 0 0 ABS 0 sfr3 -
 __Lsfr3 0 0 ABS 0 sfr3 -
-printNumber@buffer 40 0 BANK0 1 cstackBANK0 PA4.obj
+printNumber@buffer 2C 0 BANK0 1 cstackBANK0 PA4.obj
 __size_of_delay 0 0 ABS 0 - PA4.obj
 delay@i 22 0 BANK0 1 cstackBANK0 PA4.obj
 delay@j 24 0 BANK0 1 cstackBANK0 PA4.obj
-__end_ofi1___lwdiv 406 0 CODE 0 text11 PA4.obj
-__end_of_dpowers 342 0 STRING 0 strings PA4.obj
+__end_ofi1___lwdiv 2EE 0 CODE 0 text10 PA4.obj
 __Hcode 0 0 ABS 0 code -
 __Lcode 0 0 ABS 0 code -
-_period 50 0 BANK0 1 bssBANK0 PA4.obj
+_period 34 0 BANK0 1 bssBANK0 PA4.obj
 stackhi 0 0 ABS 0 - startup.obj
-sprintf@sp 3B 0 BANK0 1 cstackBANK0 PA4.obj
-_printNumber 5EC 0 CODE 0 text1 PA4.obj
+_printNumber 36 0 CODE 0 text1 PA4.obj
 __HcstackBANK0 0 0 ABS 0 cstackBANK0 -
 __LcstackBANK0 0 0 ABS 0 cstackBANK0 -
 __pcstackBANK0 20 0 BANK0 1 cstackBANK0 PA4.obj
@@ -353,23 +333,23 @@ stacklo 0 0 ABS 0 - startup.obj
 saved_w 7E 0 ABS 0 - PA4.obj
 __Hinit 24 0 CODE 0 init -
 __Linit 24 0 CODE 0 init -
-__end_of_main 28E 0 CODE 0 maintext PA4.obj
+__end_of_main 1F2 0 CODE 0 maintext PA4.obj
 __Htext 0 0 ABS 0 text -
 __Ltext 0 0 ABS 0 text -
 end_of_initialization 2E 0 CODE 0 cinit PA4.obj
 __size_of_ISR 0 0 ABS 0 - PA4.obj
 i1___lwdiv@dividend 72 0 COMMON 1 cstackCOMMON PA4.obj
-__end_of_instCtrl 670 0 CODE 0 text8 PA4.obj
-__stringtab 30E 0 STRING 0 strings PA4.obj
+__end_of_instCtrl 582 0 CODE 0 text7 PA4.obj
+__stringtab 438 0 STRING 0 strings PA4.obj
 __size_of_initLCD 0 0 ABS 0 - PA4.obj
 i1___lwdiv@counter 77 0 COMMON 1 cstackCOMMON PA4.obj
 printString@str 27 0 BANK0 1 cstackBANK0 PA4.obj
 __CFG_FOSC$XT 0 0 ABS 0 - PA4.obj
 __Hstrings 0 0 ABS 0 strings -
 __Lstrings 0 0 ABS 0 strings -
-__pstrings 30E 0 STRING 0 strings PA4.obj
-i1___lwdiv 38A 0 CODE 0 text11 PA4.obj
-_initLCD 4EA 0 CODE 0 text7 PA4.obj
+__pstrings 438 0 STRING 0 strings PA4.obj
+i1___lwdiv 272 0 CODE 0 text10 PA4.obj
+_initLCD 3D2 0 CODE 0 text6 PA4.obj
 _CCP1CON 17 0 ABS 0 - PA4.obj
 __Hbank0 0 0 ABS 0 bank0 -
 __Lbank0 0 0 ABS 0 bank0 -
@@ -378,36 +358,36 @@ __Hbank1 0 0 ABS 0 bank1 -
 __Lbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
 __Lbank2 0 0 ABS 0 bank2 -
-__end_of_dataCtrl 64A 0 CODE 0 text6 PA4.obj
+__end_of_dataCtrl 55C 0 CODE 0 text3 PA4.obj
 __Hbank3 0 0 ABS 0 bank3 -
 __Lbank3 0 0 ABS 0 bank3 -
 ___latbits 2 0 ABS 0 - PA4.obj
+printNumber@i 32 0 BANK0 1 cstackBANK0 PA4.obj
 __Hpowerup 0 0 CODE 0 powerup -
 __Lpowerup 0 0 CODE 0 powerup -
-__ptext1 5EC 0 CODE 0 text1 PA4.obj
-__ptext2 36 0 CODE 0 text2 PA4.obj
-__ptext3 47E 0 CODE 0 text3 PA4.obj
-__ptext4 28E 0 CODE 0 text4 PA4.obj
-__ptext5 5A2 0 CODE 0 text5 PA4.obj
-__ptext6 624 0 CODE 0 text6 PA4.obj
-__ptext7 4EA 0 CODE 0 text7 PA4.obj
-__ptext8 64A 0 CODE 0 text8 PA4.obj
-__ptext9 550 0 CODE 0 text9 PA4.obj
+__ptext1 36 0 CODE 0 text1 PA4.obj
+__ptext2 4EC 0 CODE 0 text2 PA4.obj
+__ptext3 536 0 CODE 0 text3 PA4.obj
+__ptext4 366 0 CODE 0 text4 PA4.obj
+__ptext5 1F2 0 CODE 0 text5 PA4.obj
+__ptext6 3D2 0 CODE 0 text6 PA4.obj
+__ptext7 55C 0 CODE 0 text7 PA4.obj
+__ptext8 49A 0 CODE 0 text8 PA4.obj
+__ptext9 2EE 0 CODE 0 text9 PA4.obj
 __Hclrtext 0 0 ABS 0 clrtext -
 __Lclrtext 0 0 ABS 0 clrtext -
-printNumber@num 3D 0 BANK0 1 cstackBANK0 PA4.obj
+printNumber@num 29 0 BANK0 1 cstackBANK0 PA4.obj
 __size_of_printString 0 0 ABS 0 - PA4.obj
 __end_of__initialization 2E 0 CODE 0 cinit PA4.obj
-__end_of___lwdiv 30E 0 CODE 0 text4 PA4.obj
+__end_of___lwdiv 272 0 CODE 0 text5 PA4.obj
 __Hidloc 0 0 IDLOC 0 idloc -
 __Lidloc 0 0 IDLOC 0 idloc -
 __Hstack 0 0 STACK 2 stack -
 __Lstack 0 0 STACK 2 stack -
-___lwmod 47E 0 CODE 0 text3 PA4.obj
+___lwmod 366 0 CODE 0 text4 PA4.obj
 __Hspace_0 2008 0 ABS 0 - -
 __Lspace_0 0 0 ABS 0 - -
 delay@ms 20 0 BANK0 1 cstackBANK0 PA4.obj
-_sprintf 36 0 CODE 0 text2 PA4.obj
 __Hspace_1 7E 0 ABS 0 - -
 __Lspace_1 0 0 ABS 0 - -
 __Hspace_2 0 0 ABS 0 - -
@@ -415,30 +395,25 @@ __Lspace_2 0 0 ABS 0 - -
 __Hcinit 36 0 CODE 0 cinit -
 __Lcinit 2A 0 CODE 0 cinit -
 __Hspace_3 0 0 ABS 0 - -
-___lwdiv 28E 0 CODE 0 text4 PA4.obj
+___lwdiv 1F2 0 CODE 0 text5 PA4.obj
 __Lspace_3 0 0 ABS 0 - -
 __size_of_main 0 0 ABS 0 - PA4.obj
-_dpowers 32E 0 STRING 0 strings PA4.obj
 instCtrl@cmd 26 0 BANK0 1 cstackBANK0 PA4.obj
-__end_of_sprintf 1BE 0 CODE 0 text2 PA4.obj
 i1___lwdiv@divisor 70 0 COMMON 1 cstackCOMMON PA4.obj
 __size_of___lwdiv 0 0 ABS 0 - PA4.obj
 __HbssBANK0 0 0 ABS 0 bssBANK0 -
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
-__pbssBANK0 50 0 BANK0 1 bssBANK0 PA4.obj
-sprintf@flag 34 0 BANK0 1 cstackBANK0 PA4.obj
-__ptext10 406 0 CODE 0 text10 PA4.obj
-__ptext11 38A 0 CODE 0 text11 PA4.obj
-sprintf@prec 3A 0 BANK0 1 cstackBANK0 PA4.obj
-__end_of___lwmod 4EA 0 CODE 0 text3 PA4.obj
-___lwmod@divisor 28 0 BANK0 1 cstackBANK0 PA4.obj
+__pbssBANK0 34 0 BANK0 1 bssBANK0 PA4.obj
+__ptext10 272 0 CODE 0 text10 PA4.obj
+__end_of___lwmod 3D2 0 CODE 0 text4 PA4.obj
+___lwmod@divisor 20 0 BANK0 1 cstackBANK0 PA4.obj
 __Hend_init 2A 0 CODE 0 end_init -
 __Lend_init 24 0 CODE 0 end_init -
 ___lwdiv@divisor 20 0 BANK0 1 cstackBANK0 PA4.obj
 ?i1___lwdiv 70 0 COMMON 1 cstackCOMMON PA4.obj
 __Hreset_vec 6 0 CODE 0 reset_vec -
 __Lreset_vec 0 0 CODE 0 reset_vec -
-__stringdata 342 0 STRING 0 strings PA4.obj
+__stringdata 458 0 STRING 0 strings PA4.obj
 __size_of_instCtrl 0 0 ABS 0 - PA4.obj
 intlevel0 0 0 CODE 0 functab startup.obj
 __CFG_WDTE$OFF 0 0 ABS 0 - PA4.obj
@@ -456,20 +431,17 @@ start_initialization 2A 0 CODE 0 cinit PA4.obj
 ___lwdiv@quotient 25 0 BANK0 1 cstackBANK0 PA4.obj
 __Hmaintext 0 0 ABS 0 maintext -
 __Lmaintext 0 0 ABS 0 maintext -
-__pmaintext 1BE 0 CODE 0 maintext PA4.obj
+__pmaintext 122 0 CODE 0 maintext PA4.obj
 __size_ofi1___lwdiv 0 0 ABS 0 - PA4.obj
-__size_of_sprintf 0 0 ABS 0 - PA4.obj
 i1___lwdiv@quotient 75 0 COMMON 1 cstackCOMMON PA4.obj
 __initialization 2A 0 CODE 0 cinit PA4.obj
-__end_of_initLCD 550 0 CODE 0 text7 PA4.obj
-__stringbase 32C 0 STRING 0 strings PA4.obj
-___lwmod@dividend 2A 0 BANK0 1 cstackBANK0 PA4.obj
-sprintf@_val 36 0 BANK0 1 cstackBANK0 PA4.obj
-___lwmod@counter 2D 0 BANK0 1 cstackBANK0 PA4.obj
+__end_of_initLCD 438 0 CODE 0 text6 PA4.obj
+__stringbase 456 0 STRING 0 strings PA4.obj
+___lwmod@dividend 22 0 BANK0 1 cstackBANK0 PA4.obj
+___lwmod@counter 25 0 BANK0 1 cstackBANK0 PA4.obj
 __CFG_CP$OFF 0 0 ABS 0 - PA4.obj
 __size_of_dataCtrl 0 0 ABS 0 - PA4.obj
 __CFG_LVP$OFF 0 0 ABS 0 - PA4.obj
-sprintf@c 3C 0 BANK0 1 cstackBANK0 PA4.obj
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
@@ -496,9 +468,9 @@ sprintf@c 3C 0 BANK0 1 cstackBANK0 PA4.obj
 # All other numeric quantities are in decimal.
 %SEGMENTS
 reset_vec 0 0 0 3 2
-intentry 0 4 8 183 2
+intentry 0 4 8 218 2
 config 0 2007 400E 1 2
 cstackCOMMON 1 70 70 E 1
-cstackBANK0 1 20 20 32 1
-strings 0 187 30E 3E 2
-text11 0 1C5 38A 173 2
+cstackBANK0 1 20 20 16 1
+strings 0 21C 438 31 2
+text8 0 24D 49A 74 2

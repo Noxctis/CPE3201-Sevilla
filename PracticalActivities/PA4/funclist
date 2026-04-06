@@ -1,17 +1,15 @@
-_printNumber: CODE, 758 0 28
-_printString: CODE, 721 0 37
-_delay: CODE, 680 0 41
-__stringtab: STRING, 391 0 16
-__stringdata: STRING, 417 0 36
-_ISR: CODE, 515 0 60
-i1___lwdiv: CODE, 453 0 62
-_dpowers: STRING, 407 0 10
-_main: CODE, 223 0 104
-_instCtrl: CODE, 805 0 19
-_dataCtrl: CODE, 786 0 19
+_printNumber: CODE, 27 0 118
+_printString: CODE, 630 0 37
+_delay: CODE, 589 0 41
+__stringtab: STRING, 540 0 16
+__stringdata: STRING, 556 0 33
+_ISR: CODE, 375 0 60
+i1___lwdiv: CODE, 313 0 62
+_main: CODE, 145 0 104
+_instCtrl: CODE, 686 0 19
+_dataCtrl: CODE, 667 0 19
 __initialization: CODE, 21 0 2
-___lwdiv: CODE, 327 0 64
-_sprintf: CODE, 27 0 196
-___lwmod: CODE, 575 0 54
-_initLCD: CODE, 629 0 51
-Total: 799
+___lwdiv: CODE, 249 0 64
+___lwmod: CODE, 435 0 54
+_initLCD: CODE, 489 0 51
+Total: 680

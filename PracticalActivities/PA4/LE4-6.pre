@@ -1557,9 +1557,23 @@ dataCtrl(*str++);
 }
 
 void printNumber(unsigned int num) {
-char buffer[16];
-sprintf(buffer, "%u", num);
-printString(buffer);
+char buffer[6];
+int i = 5;
+
+buffer[--i] = '\0';
+
+
+if (num == 0) {
+buffer[--i] = '0';
+} else {
+while (num > 0 && i > 0) {
+buffer[--i] = (num % 10) + '0';
+num /= 10;
+}
+}
+
+
+printString(&buffer[i]);
 }
 
 
@@ -1574,7 +1588,9 @@ RA0 = RA0^1;
 
 
 period = CCPR1 * 8;
-period = CCPR1/1000;
+period = period/1000;
+
+
 }
 GIE = 1;
 }
