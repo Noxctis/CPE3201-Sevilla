@@ -1,0 +1,7 @@
+_ISR: CODE, 32 0 144
+_main: CODE, 176 0 65
+__initialization: CODE, 21 0 7
+___lwdiv: CODE, 241 0 62
+___lwmod: CODE, 303 0 52
+___wmul: CODE, 355 0 35
+Total: 365
