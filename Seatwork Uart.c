@@ -24,20 +24,20 @@ void interrupt ISR(void) {
 
 void main(void) {
     // Baud rate calculation for Synchronous Mode
-    [span_0](start_span)// Formula: (Synchronous) Baud Rate = Fosc/(4 (X + 1))[span_0](end_span)
+    // Formula: (Synchronous) Baud Rate = Fosc/(4 (X + 1))
     // Assuming target baud rate of 9600 bps with Fosc = 4MHz:
     // X = (4000000 / (4 * 9600)) - 1 = 103 (decimal)
     SPBRG = 103;
 
     // Configure TXSTA Register
-    TXSTAbits.SYNC = 1; [span_1](start_span)// 1 = Synchronous mode[span_1](end_span)
-    TXSTAbits.CSRC = 1; [span_2](start_span)// 1 = Master mode (clock generated internally from BRG)[span_2](end_span)
-    TXSTAbits.TX9 = 0;  [span_3](start_span)// 0 = Selects 8-bit transmission[span_3](end_span)
-    TXSTAbits.TXEN = 1; [span_4](start_span)// 1 = Transmit enabled[span_4](end_span)
+    TXSTAbits.SYNC = 1; // 1 = Synchronous mode
+    TXSTAbits.CSRC = 1; // 1 = Master mode (clock generated internally from BRG)
+    TXSTAbits.TX9 = 0;  // 0 = Selects 8-bit transmission
+    TXSTAbits.TXEN = 1; // 1 = Transmit enabled
 
     // Configure RCSTA Register
-    RCSTAbits.SPEN = 1; [span_5](start_span)// 1 = Serial port enabled (configures RC7/RX/DT and RC6/TX/CK pins as serial port pins)[span_5](end_span)
-    RCSTAbits.RX9 = 0;  [span_6](start_span)// 0 = Selects 8-bit reception[span_6](end_span)
+    RCSTAbits.SPEN = 1; // 1 = Serial port enabled (configures RC7/RX/DT and RC6/TX/CK pins as serial port pins)
+    RCSTAbits.RX9 = 0;  // 0 = Selects 8-bit reception
     
     // Interrupt configuration
     INTCONbits.GIE = 1;  
@@ -49,7 +49,7 @@ void main(void) {
 
     // 2. Receive 8-bit data synchronously
     PIE1bits.RCIE = 1;   
-    RCSTAbits.SREN = 1;  [span_7](start_span)// 1 = Enables single receive[span_7](end_span)
+    RCSTAbits.SREN = 1;  // 1 = Enables single receive
     while(!rx_complete); 
 
     while(1) {
