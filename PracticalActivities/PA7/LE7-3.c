@@ -12,7 +12,6 @@
 #pragma config CP = OFF
 
 // --- Hardware Definitions ---
-// As per your previous code, LCD Control is on PORTD
 #define RS RD5
 #define EN RD6
 #define RW RD7
@@ -63,7 +62,7 @@ void dataCtrl(unsigned char data){
 }
 
 void initLCD(void){
-    delay(20);      
+    delay(20);     
     instCtrl(0x38); 
     delay(5);
     instCtrl(0x38); 
@@ -101,17 +100,16 @@ void printNumber(unsigned int num) {
 // --- I2C Master Functions ---
 
 void I2C_Wait(void) { 
-    // Wait until MSSP is idle
     while((SSPCON2 & 0x1F) || (SSPSTAT & 0x04));   
 } 
 
 void init_I2C_Master(void) {  
-    TRISC3 = 1;      // SCL
-    TRISC4 = 1;      // SDA
+    TRISC3 = 1;      
+    TRISC4 = 1;      
     SSPCON = 0x28;   
     SSPCON2 = 0x00;  
     SSPSTAT = 0x00;  
-    SSPADD = 0x09;   // 100kHz at 4MHz Fosc
+    SSPADD = 0x09;   
 } 
 
 void I2C_Start(void) { 
@@ -132,7 +130,7 @@ void I2C_RepeatedStart(void) {
 void I2C_Send(unsigned char data) { 
     I2C_Wait(); 
     SSPBUF = data;  
-    I2C_Wait(); // Ensure transmission finishes
+    I2C_Wait(); 
 } 
 
 unsigned char I2C_Receive(unsigned char ack) { 
@@ -142,31 +140,28 @@ unsigned char I2C_Receive(unsigned char ack) {
     I2C_Wait();    
     temp = SSPBUF; 
     I2C_Wait();    
-    ACKDT = (ack) ? 0 : 1; // 1 for ACK, 0 for NACK
+    ACKDT = (ack) ? 0 : 1; 
     ACKEN = 1;     
     return temp;  
 } 
 
-// --- SHT21 Sensor Function (Strictly follows Fig. 5) ---
+// --- SHT21 Sensor Function ---
 
 unsigned int read_SHT21(unsigned char cmd) {
     unsigned char msb, lsb;
     unsigned int raw_data;
 
     I2C_Start();             
-    I2C_Send(0x80);          // S + Address + Write (0)
-    I2C_Send(cmd);           // Command (0xE5 or 0xE3)
+    I2C_Send(0x80);          
+    I2C_Send(cmd);           
     
-    I2C_RepeatedStart();     // Sr
-    I2C_Send(0x81);          // Address + Read (1)
+    I2C_RepeatedStart();     
+    I2C_Send(0x81);          
     
-    // During this phase, SHT21 holds SCL low.
-    // The PIC's MSSP hardware automatically waits.
-    msb = I2C_Receive(1);    // Read Data (MSB), send ACK
-    lsb = I2C_Receive(0);    // Read Data (LSB) + Stat, send NACK (Skip checksum)
-    I2C_Stop();              // P
+    msb = I2C_Receive(1);    
+    lsb = I2C_Receive(0);    
+    I2C_Stop();              
     
-    // Combine into 16-bit word
     raw_data = ((unsigned int)msb << 8) | lsb;
     
     return raw_data;
@@ -175,75 +170,68 @@ unsigned int read_SHT21(unsigned char cmd) {
 // --- Main Program ---
 
 void main(void) { 
-    // Port Initialization
     PORTB = 0x00;
     PORTC = 0x00;
     PORTD = 0x00;
     
-    TRISB = 0x00; // LCD Data (Outputs)
-    TRISC = 0x18; // RC3/RC4 I2C (Inputs)
-    TRISD = 0x00; // LCD Control (Outputs)
+    TRISB = 0x00; 
+    TRISC = 0x18; 
+    TRISD = 0x00; 
     
-    delay(100); // Give SHT21 100ms to power up
+    delay(100); 
     
     init_I2C_Master();  
     initLCD();
     
     for(;;) {  
         // ==========================================
-        // 1. Humidity (Fig 4 & Manual Formula)
+        // 1. Humidity (Strict Truncation - Drop Decimal)
         // ==========================================
         unsigned int raw_rh_16 = read_SHT21(0xE5); 
+        raw_rh_16 &= 0xFFFC; 
         
-        // Mask status bits & shift right 2 to extract the 14-bit resolution value (S_RH)
-        unsigned int s_rh = (raw_rh_16 & 0xFFFC) >> 2; 
+        // No mathematical rounding added. The bit shift strictly chops the decimal.
+        // 90.86% goes straight to 90.
+        int rh_int = (int)(((125L * (long)raw_rh_16)) >> 16) - 6;
         
-        // Integer Math Formula: RH = -6 + (125 * S_RH) / 16384
-        unsigned long rh_calc = (125UL * s_rh) / 16384UL;
-        int rh_int = (int)rh_calc - 6;
-        
-        if (rh_int < 0) rh_int = 0; // Prevent negative display
+        if (rh_int <= 0) rh_int = 0; 
+        if (rh_int > 100) rh_int = 100;
         
         // ==========================================
-        // 2. Temperature (Fig 4 & Manual Formula)
+        // 2. Temperature (Rounded to Nearest Integer)
         // ==========================================
         unsigned int raw_t_16 = read_SHT21(0xE3);  
+        raw_t_16 &= 0xFFFC; 
         
-        // Mask status bits & shift right 2 to extract the 14-bit resolution value (S_T)
-        unsigned int s_t = (raw_t_16 & 0xFFFC) >> 2;
+        long t_100 = (((17572L * (long)raw_t_16) + 32768L) >> 16) - 4685L;
         
-        // Integer Math Formula (Scaled by 10 for 1 decimal place)
-        // T_x10 = -468 + (1757 * S_T) / 16384
-        unsigned long t_calc = (1757UL * s_t) / 16384UL;
-        int temp_x10 = (int)t_calc - 468;
-        
-        int t_int = temp_x10 / 10;
-        int t_frac = temp_x10 % 10;
-        if (t_frac < 0) t_frac = -t_frac; // Absolute value for decimal
+        int t_int;
+        if (t_100 >= 0) {
+            t_int = (int)((t_100 + 50L) / 100L); 
+        } else {
+            t_int = (int)((t_100 - 50L) / 100L); 
+        }
         
         // ==========================================
         // 3. Update LCD Display
         // ==========================================
-        
-        // Line 1: "Humidity: 90%"
         instCtrl(0x80); 
         printString("Humidity: ");
         printNumber((unsigned int)rh_int);
         printString("%    "); 
         
-        // Line 2: "Temperature: 25.3 C"
         instCtrl(0xC0); 
-        printString("Temperature: ");
+        printString("Temp: ");
+        
         if (t_int < 0) {
             printString("-");
             printNumber((unsigned int)(-t_int));
         } else {
             printNumber((unsigned int)t_int);
         }
-        printString(".");
-        printNumber((unsigned int)t_frac);
-        printString(" C  "); 
         
-        delay(80); // Wait before next measurement
+        printString(" C    "); 
+        
+        delay(150); 
     } 
 }
