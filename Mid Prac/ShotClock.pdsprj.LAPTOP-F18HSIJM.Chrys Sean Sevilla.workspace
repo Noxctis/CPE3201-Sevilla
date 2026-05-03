@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
- <FRAME activewindow="0">
+ <FRAME activewindow="1">
   <PLACEMENT>2c0000000200000003000000fffffffffffffffffffffffffffffffff2000000110000000f09000048050000</PLACEMENT>
   <WINDOW type="default" module="ISIS">
    <editor metric="0" gridmajor="2540000" mode="00000000" zoom="0" scale="162" flipped="0" gridminor="254000" gridmode="32" snapidx="2" snap="254000" xcursor="0" orgmode="0" snaprange="127000">
@@ -14,8 +14,12 @@
    <PROJECT ACTIVE="TRUE" NAME="PIC16F877A_1" CONFIGURATION="Debug">
     <PROGRAMMER NAME="" INTERFACE=""/>
    </PROJECT>
+   <PROJECT NAME="PIC16F877A_2" CONFIGURATION="Debug">
+    <PROGRAMMER NAME="" INTERFACE=""/>
+   </PROJECT>
    <EDITOR>
-    <FILE LINE="65" ACTIVE="1" FIRST="30" NAME="PIC16F877A_1/main.c" INDEX="20"/>
+    <FILE ACTIVE="1" NAME="PIC16F877A_1/main.c"/>
+    <FILE NAME="PIC16F877A_2/main.c"/>
    </EDITOR>
   </WINDOW>
  </FRAME>
