@@ -1,0 +1,9 @@
+_delay: CODE, 494 0 22
+_ISR: CODE, 516 0 20
+_main: CODE, 27 0 194
+__initialization: CODE, 21 0 2
+___lwdiv: CODE, 395 0 64
+___lldiv: CODE, 221 0 96
+___llmod: CODE, 317 0 78
+___wmul: CODE, 459 0 35
+Total: 511
