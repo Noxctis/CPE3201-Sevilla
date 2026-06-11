@@ -1,0 +1,9 @@
+_main: CODE, 1429 0 603
+___lmul: CODE, 1272 0 63
+_setMotors: CODE, 1130 0 42
+__initialization: CODE, 2032 0 12
+___lldiv: CODE, 1335 0 94
+___lwmod: CODE, 1220 0 52
+_System_Init: CODE, 1172 0 48
+_ADC_Read: CODE, 1091 0 39
+Total: 953
